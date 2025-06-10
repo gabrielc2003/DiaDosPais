@@ -31,6 +31,7 @@ h1 {
     color: #3cc5e7; /* Cor do título */
     font-size: 4em; /* Tamanho do título */
     margin-bottom: 0px;
+    margin-left: 55px;
 }
 
 .highlight {
@@ -41,11 +42,25 @@ h1 {
 p {
     font-size: 2em; /* Tamanho do texto */
     margin: 5px 0;
+    margin-left: 55px;
+}
+
+
+p#special-message{
+    margin-left: 95px; 
+    margin-top: 30px; 
+    font-size: 1.6rem;
+
+}
+
+p.dedicatoria{
+     font-size: 1.3rem;
+     margin-top: 20px;
 }
 
 #btnPlay,#btnPause{
     margin-top: 10px;
-    width: 90px;
+    width: 50px;
     height:40px;
     background-color: #0c62e2;
     border:none;
@@ -106,6 +121,7 @@ p {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-left: 95px;
 }
 
 .btn:hover{
@@ -122,7 +138,6 @@ p {
     }
 
     .photo-message {
-        font-size: 1em; /* Reduz o tamanho do texto */
         max-width: 150px; /* Reduz a largura máxima da mensagem */
     }
 
@@ -134,7 +149,20 @@ p {
     .btn {
         font-size: 14px; /* Reduz um pouco o tamanho da fonte */
         padding: 8px 16px; /* Reduz o tamanho do botão */
+        margin-left: 15px; 
     }
+
+    p#special-message{
+        margin-left: 15px; 
+        margin-top: 30px; 
+        font-size: 1.6rem;
+
+    }
+
+    h1,p {
+        margin-left: 15px; 
+    }
+
 }
 
 
