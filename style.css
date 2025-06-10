@@ -157,6 +157,7 @@ p.dedicatoria{
 
     .photo-message {
         max-width: 150px; /* Reduz a largura máxima da mensagem */
+        font-size: 1.2rem;
     }
 
     .container {
@@ -169,7 +170,7 @@ p.dedicatoria{
         padding: 8px 16px; /* Reduz o tamanho do botão */
         margin-left: 15px; 
         width: 280px;
-        height: 30px;
+        height: 40px;
         
     }
     #btnPlay{
