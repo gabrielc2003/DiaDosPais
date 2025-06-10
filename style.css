@@ -1,10 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Outfit:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Outfit:wght@100..900&family=Share+Tech&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Edu+QLD+Hand:wght@400..700&family=Outfit:wght@100..900&display=swap');
 
+:root{
+    --cor-primaria: #CFE5F0; 
+    --cor-secundaria: #CC7ACC;
+    --cor-terciaria: #6486F0;
+    --cor-titulos: #E67ACC;
+    --cor-cabecalho: #c5e0e7;
+
+    --fonte-principal: 'Share Tech', sans-serif;
+    --fonte-secundaria: 'Dancing Script', serif;
+    --fonte-paragrafo: 'Outfit', serif;
+
+}
 /* Estilos gerais */
 body {
-    font-family: 'Share Tech', sans-serif;
     background-color: #070f5e49;
     color: #ffffff; /* Texto branco */
     text-align: center;
@@ -20,7 +29,7 @@ body {
 .container {
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9); /* Sombra */
     width: 90%; /* Ocupa 90% da largura da tela */
     max-width: 600px; /* Limita a largura máxima */
     position: relative; /* Para garantir que o conteúdo fique acima dos corações */
@@ -28,6 +37,7 @@ body {
 }
 
 h1 {
+    font-family: var(--fonte-principal);
     color: #3cc5e7; /* Cor do título */
     font-size: 4em; /* Tamanho do título */
     margin-bottom: 0px;
@@ -40,7 +50,8 @@ h1 {
 }
 
 p {
-    font-size: 2em; /* Tamanho do texto */
+    font-family: var(--fonte-paragrafo);
+    font-size: 1.5em; /* Tamanho do texto */
     margin: 5px 0;
     margin-left: 55px;
 }
@@ -68,6 +79,11 @@ p.dedicatoria{
 
 #btnPlay:hover,#btnPause:hover{
     background-color: #3cc5e77e;
+
+}
+
+#btnPlay{
+    margin-left: 55px; 
 
 }
 
@@ -104,7 +120,8 @@ p.dedicatoria{
 
 /* Estilo das mensagens */
 .photo-message {
-    font-size: 1.2em;
+    font-family: var(--fonte-secundaria);
+    font-size: 1.5rem;
     color: #ffffff; /* Cor do texto */
     max-width: 200px; /* Largura máxima da mensagem */
 }
@@ -118,10 +135,11 @@ p.dedicatoria{
     border-radius: 30px;
     border: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 18px;
     cursor: pointer;
     transition: background-color 0.3s;
     margin-left: 95px;
+    font-family: var(--fonte-principal);
 }
 
 .btn:hover{
@@ -147,9 +165,16 @@ p.dedicatoria{
     }
 
     .btn {
-        font-size: 14px; /* Reduz um pouco o tamanho da fonte */
+        font-size: 18px; /* Reduz um pouco o tamanho da fonte */
         padding: 8px 16px; /* Reduz o tamanho do botão */
         margin-left: 15px; 
+        width: 280px;
+        height: 30px;
+        
+    }
+    #btnPlay{
+        margin-left: 15px; 
+
     }
 
     p#special-message{
