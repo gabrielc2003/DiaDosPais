@@ -36,12 +36,18 @@ body {
     z-index: 1; /* Coloca o container acima dos corações */
 }
 
-h1 {
+h2 {
     font-family: var(--fonte-principal);
     color: #3cc5e7; /* Cor do título */
-    font-size: 4em; /* Tamanho do título */
+    font-size: 2em; /* Tamanho do título */
     margin-bottom: 0px;
     margin-left: 55px;
+    min-height: 3em;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 580px; /* ou defina um valor específico, tipo 400px */
+    text-align: center;
 }
 
 .highlight {
@@ -56,7 +62,6 @@ p {
     margin-left: 55px;
 }
 
-
 p#special-message{
     margin-left: 95px; 
     margin-top: 30px; 
@@ -66,7 +71,6 @@ p#special-message{
 
 p.dedicatoria{
      font-size: 1.3rem;
-     margin-top: 20px;
 }
 
 #btnPlay,#btnPause{
@@ -185,7 +189,7 @@ p.dedicatoria{
 
     }
 
-    h1,p {
+    h2,p {
         margin-left: 15px; 
     }
 

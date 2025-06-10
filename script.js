@@ -35,6 +35,63 @@ function createHearts() {
     }
 }
 
+function typeWriterLoop(element, messages, speed = 100, pause = 1500) {
+    let msgIndex = 0;
+    let charIndex = 0;
+    let typing = true;
+
+    function type() {
+        const currentText = messages[msgIndex];
+
+        if (typing) {
+            if (charIndex <= currentText.length) {
+                element.innerHTML = currentText.substring(0, charIndex);
+                charIndex++;
+                setTimeout(type, speed);
+            } else {
+                typing = false;
+                setTimeout(type, pause);
+            }
+        } else {
+            if (charIndex >= 0) {
+                element.innerHTML = currentText.substring(0, charIndex);
+                charIndex--;
+                setTimeout(type, speed / 2);
+            } else {
+                typing = true;
+                msgIndex = (msgIndex + 1) % messages.length;
+                setTimeout(type, speed);
+            }
+        }
+    }
+
+    type();
+}
+
+// Inicia quando a página carrega
+document.addEventListener('DOMContentLoaded', () => {
+    const h2 = document.querySelector('h2');
+
+    const mensagens = [
+        'Feliz Dia dos Pais!',
+        'Você é o melhor pai do mundo!',
+        'Essa é uma homenagem especial!',
+        'Eu te amo muito!'
+    ];
+
+    typeWriterLoop(h2, mensagens, 80, 1500);
+});
+
+
+// Inicia quando a página carrega
+document.addEventListener('DOMContentLoaded', () => {
+    const h1 = document.querySelector('h1');
+    const text = h1.textContent || h1.innerText;
+
+    typeWriter(h1, text, 300); // 100 ms por letra (ajuste se quiser mais rápido ou mais devagar)
+});
+
+
 // Chama a função para criar os corações
 createHearts();
 
