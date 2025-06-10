@@ -37,3 +37,17 @@ function createHearts() {
 
 // Chama a função para criar os corações
 createHearts();
+
+ // Cria o som com Howler
+    const som = new Howl({
+      src: ['musica.mp3'] // coloque o caminho do seu áudio aqui
+    });
+
+    // Eventos dos botões
+    document.getElementById('btnPlay').addEventListener('click', () => {
+      som.play();
+    });
+
+    document.getElementById('btnPause').addEventListener('click', () => {
+      som.pause();
+    });
