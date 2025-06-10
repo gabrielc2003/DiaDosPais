@@ -75,22 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const mensagens = [
         'Feliz Dia dos Pais!',
         'Você é o melhor pai do mundo!',
-        'Essa é uma homenagem especial!',
+        'Uma homenagem especial!',
         'Eu te amo muito!'
     ];
 
     typeWriterLoop(h2, mensagens, 80, 1500);
 });
-
-
-// Inicia quando a página carrega
-document.addEventListener('DOMContentLoaded', () => {
-    const h1 = document.querySelector('h1');
-    const text = h1.textContent || h1.innerText;
-
-    typeWriter(h1, text, 300); // 100 ms por letra (ajuste se quiser mais rápido ou mais devagar)
-});
-
 
 // Chama a função para criar os corações
 createHearts();
