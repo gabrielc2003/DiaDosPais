@@ -14,7 +14,7 @@
 }
 /* Estilos gerais */
 body {
-    background-color: #070f5e49;
+    background-color: #0F1128;
     color: #ffffff; /* Texto branco */
     text-align: center;
     margin: 0;
@@ -154,7 +154,7 @@ p.dedicatoria{
 }
 
 /* Ajustes para telas menores (celulares) */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .photo {
         width: 120px; /* Reduz o tamanho das fotos */
         margin-right: 10px; /* Reduz o espaço entre a foto e a mensagem */
@@ -195,7 +195,7 @@ p.dedicatoria{
     }
 
     h2{
-         margin-left: 105px; 
+         margin-left: 205px; 
          font-size: 2rem;
          width: 188px;
          display: block;
