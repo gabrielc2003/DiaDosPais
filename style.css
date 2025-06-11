@@ -195,7 +195,7 @@ p.dedicatoria{
     }
 
     h2{
-         margin-left: 205px; 
+         margin-left: 85px; 
          font-size: 2rem;
          width: 188px;
          display: block;
@@ -206,6 +206,33 @@ p.dedicatoria{
 
 
 }
+
+/* Para telas entre 640px e 747px */
+@media (min-width: 440px) and (max-width: 747px) {
+    h2 {
+        margin-left: 220px;
+        font-size: 2.5rem;
+        width: 180px;
+        min-height: 5em;
+        white-space: normal;
+    }
+}
+
+/* Para telas entre 748px e 1024px (tablets) */
+@media (min-width: 748px) and (max-width: 1024px) {
+    h2 {
+        margin-left: 10px;
+        font-size: 2.5rem;
+        width: auto;
+        min-height: 1.5em;
+        white-space: nowrap;
+    }
+}
+
+
+
+
+
 
 
 /* Container dos corações */
