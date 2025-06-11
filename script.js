@@ -1,117 +1,124 @@
-// Função para criar corações
-function createHearts() {
+// ================= TELA 1 =================
+function iniciarTela1() {
   const heartsContainer = document.getElementById('hearts-container');
-  if (!heartsContainer) return; // <- só cria se o container existir
+  const h2 = document.querySelector('h2');
+  const btnPlay = document.getElementById('btnPlay');
+  const btnPause = document.getElementById('btnPause');
 
-  for (let i = 0; i < 20; i++) {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.style.left = `${Math.random() * 100}vw`;
-    heart.style.animationDuration = `${Math.random() * 3 + 3}s`;
-    heart.style.opacity = Math.random();
-    heartsContainer.appendChild(heart);
+  if (!heartsContainer || !h2 || !btnPlay || !btnPause) return;
+
+  // Corações
+  function createHearts() {
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = `${Math.random() * 100}vw`;
+      heart.style.animationDuration = `${Math.random() * 3 + 3}s`;
+      heart.style.opacity = Math.random();
+      heartsContainer.appendChild(heart);
+    }
   }
-}
 
-createHearts();
-
-
-function typeWriterLoop(element, messages, speed = 100, pause = 1500) {
+  // Mensagens com efeito de digitação
+  function typeWriterLoop(element, messages, speed = 100, pause = 1500) {
     let msgIndex = 0;
     let charIndex = 0;
     let typing = true;
 
     function type() {
-        const currentText = messages[msgIndex];
-
-        if (typing) {
-            if (charIndex <= currentText.length) {
-                element.innerHTML = currentText.substring(0, charIndex);
-                charIndex++;
-                setTimeout(type, speed);
-            } else {
-                typing = false;
-                setTimeout(type, pause);
-            }
+      const currentText = messages[msgIndex];
+      if (typing) {
+        if (charIndex <= currentText.length) {
+          element.innerHTML = currentText.substring(0, charIndex);
+          charIndex++;
+          setTimeout(type, speed);
         } else {
-            if (charIndex >= 0) {
-                element.innerHTML = currentText.substring(0, charIndex);
-                charIndex--;
-                setTimeout(type, speed / 2);
-            } else {
-                typing = true;
-                msgIndex = (msgIndex + 1) % messages.length;
-                setTimeout(type, speed);
-            }
+          typing = false;
+          setTimeout(type, pause);
         }
+      } else {
+        if (charIndex >= 0) {
+          element.innerHTML = currentText.substring(0, charIndex);
+          charIndex--;
+          setTimeout(type, speed / 2);
+        } else {
+          typing = true;
+          msgIndex = (msgIndex + 1) % messages.length;
+          setTimeout(type, speed);
+        }
+      }
     }
 
     type();
+  }
+
+  createHearts();
+
+  const mensagens = [
+    'Feliz Dia dos Pais!',
+    'Você é o melhor pai do mundo!',
+    'Uma homenagem especial!',
+    'Eu te amo muito!'
+  ];
+  typeWriterLoop(h2, mensagens, 80, 1500);
+
+  // Som
+  const som = new Howl({ src: ['musica.mp3'] });
+  btnPlay.addEventListener('click', () => som.play());
+  btnPause.addEventListener('click', () => som.pause());
 }
 
-// Inicia quando a página carrega
-document.addEventListener('DOMContentLoaded', () => {
-    const h2 = document.querySelector('h2');
 
-    const mensagens = [
-        'Feliz Dia dos Pais!',
-        'Você é o melhor pai do mundo!',
-        'Uma homenagem especial!',
-        'Eu te amo muito!'
-    ];
-
-    typeWriterLoop(h2, mensagens, 80, 1500);
-});
-
-// Chama a função para criar os corações
-createHearts();
-
- // Cria o som com Howler
-    const som = new Howl({
-      src: ['musica.mp3'] // coloque o caminho do seu áudio aqui
-    });
-
-    // Eventos dos botões
-    document.getElementById('btnPlay').addEventListener('click', () => {
-      som.play();
-    });
-
-    document.getElementById('btnPause').addEventListener('click', () => {
-      som.pause();
-    });
-
+// ================= TELA 2 =================
+function iniciarTela2() {
   const letras = document.querySelectorAll('.letter');
+  const listaPalavras = document.querySelector('.words-to-find');
+
+  if (!letras.length || !listaPalavras) return;
+
   const palavras = ['BANANA', 'UVA', 'MAÇÃ', 'KIWI'];
   const encontradas = [];
-
   let selecionadas = [];
+  let interagindo = false;
 
-  letras.forEach((letra) => {
-    letra.addEventListener('click', () => {
-      letra.classList.toggle('selecionada');
+  function adicionarLetra(letra) {
+    if (letra && letra.classList.contains('letter') && !letra.classList.contains('selecionada')) {
+      letra.classList.add('selecionada');
+      selecionadas.push(letra);
+    }
+  }
 
-      if (!selecionadas.includes(letra)) {
-        selecionadas.push(letra);
-      } else {
-        selecionadas = selecionadas.filter(l => l !== letra);
-      }
-
-      verificarPalavra();
-    });
-  });
+  function limparSelecao() {
+    selecionadas.forEach(l => l.classList.remove('selecionada'));
+    selecionadas = [];
+  }
 
   function verificarPalavra() {
-    const textoSelecionado = selecionadas.map(l => l.textContent).join('');
+    const texto = selecionadas.map(l => l.textContent).join('');
 
-    // Verifica se é alguma das palavras
     palavras.forEach(palavra => {
-      if (textoSelecionado === palavra && !encontradas.includes(palavra)) {
+      if (texto === palavra && !encontradas.includes(palavra)) {
         encontradas.push(palavra);
         selecionadas.forEach(l => l.classList.add('encontrada'));
         atualizarLista(palavra);
-        selecionadas = [];
+        verificarFimDoJogo(); // 👈 chama aqui
       }
     });
+
+    limparSelecao();
+  }
+
+  function verificarFimDoJogo() {
+    if (encontradas.length === palavras.length) {
+      Swal.fire({
+        title: "Parabéns, amor! 🎉",
+        text: "Você encontrou todas as palavras!",
+        icon: "success",
+        confirmButtonText: "Avançar"
+      }).then(() => {
+        window.location.href = "final.html"; // ajuste conforme quiser
+      });
+    }
   }
 
   function atualizarLista(palavra) {
@@ -124,3 +131,65 @@ createHearts();
     });
   }
 
+  // Eventos de mouse
+  document.addEventListener('mousedown', (e) => {
+    interagindo = true;
+    limparSelecao();
+    const el = e.target;
+    adicionarLetra(el);
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!interagindo) return;
+    const el = document.elementFromPoint(e.clientX, e.clientY);
+    adicionarLetra(el);
+  });
+
+  document.addEventListener('mouseup', () => {
+    interagindo = false;
+    verificarPalavra();
+  });
+
+  // Eventos de touch
+  document.addEventListener('touchstart', (e) => {
+    interagindo = true;
+    limparSelecao();
+    const touch = e.touches[0];
+    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+    adicionarLetra(el);
+  });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!interagindo) return;
+    const touch = e.touches[0];
+    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+    adicionarLetra(el);
+  });
+
+  document.addEventListener('touchend', () => {
+    interagindo = false;
+    verificarPalavra();
+  });
+
+  function embaralharLetras() {
+    const container = document.querySelector('.letras');
+    const letras = Array.from(container.children);
+
+    for (let i = letras.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [letras[i], letras[j]] = [letras[j], letras[i]];
+    }
+
+    letras.forEach(letra => container.appendChild(letra));
+  }
+
+  embaralharLetras(); // 👈 chama ao iniciar
+}
+
+
+
+// ================= INICIALIZAÇÃO =================
+document.addEventListener('DOMContentLoaded', () => {
+  iniciarTela1();
+  iniciarTela2();
+});
