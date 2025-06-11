@@ -1,39 +1,20 @@
 // Função para criar corações
 function createHearts() {
-    const heartsContainer = document.getElementById('hearts-container');
+  const heartsContainer = document.getElementById('hearts-container');
+  if (!heartsContainer) return; // <- só cria se o container existir
 
-    // Cria 20 corações
-    for (let i = 0; i < 20; i++) {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-
-        // Posiciona os corações aleatoriamente na tela
-        heart.style.left = `${Math.random() * 100}vw`; /* Posição horizontal */
-        heart.style.animationDuration = `${Math.random() * 3 + 2}s`; /* Duração da animação */
-        heart.style.opacity = Math.random(); /* Opacidade aleatória */
-
-        heartsContainer.appendChild(heart);
-    }
+  for (let i = 0; i < 20; i++) {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = `${Math.random() * 100}vw`;
+    heart.style.animationDuration = `${Math.random() * 3 + 3}s`;
+    heart.style.opacity = Math.random();
+    heartsContainer.appendChild(heart);
+  }
 }
 
-// Chama a função para criar os corações
-createHearts();// Função para criar corações
-function createHearts() {
-    const heartsContainer = document.getElementById('hearts-container');
+createHearts();
 
-    // Cria 20 corações
-    for (let i = 0; i < 20; i++) {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-
-        // Posiciona os corações aleatoriamente na tela
-        heart.style.left = `${Math.random() * 100}vw`; /* Posição horizontal */
-        heart.style.animationDuration = `${Math.random() * 3 + 3}s`; /* Duração da animação */
-        heart.style.opacity = Math.random(); /* Opacidade aleatória */
-
-        heartsContainer.appendChild(heart);
-    }
-}
 
 function typeWriterLoop(element, messages, speed = 100, pause = 1500) {
     let msgIndex = 0;
@@ -98,3 +79,48 @@ createHearts();
     document.getElementById('btnPause').addEventListener('click', () => {
       som.pause();
     });
+
+  const letras = document.querySelectorAll('.letter');
+  const palavras = ['BANANA', 'UVA', 'MAÇÃ', 'KIWI'];
+  const encontradas = [];
+
+  let selecionadas = [];
+
+  letras.forEach((letra) => {
+    letra.addEventListener('click', () => {
+      letra.classList.toggle('selecionada');
+
+      if (!selecionadas.includes(letra)) {
+        selecionadas.push(letra);
+      } else {
+        selecionadas = selecionadas.filter(l => l !== letra);
+      }
+
+      verificarPalavra();
+    });
+  });
+
+  function verificarPalavra() {
+    const textoSelecionado = selecionadas.map(l => l.textContent).join('');
+
+    // Verifica se é alguma das palavras
+    palavras.forEach(palavra => {
+      if (textoSelecionado === palavra && !encontradas.includes(palavra)) {
+        encontradas.push(palavra);
+        selecionadas.forEach(l => l.classList.add('encontrada'));
+        atualizarLista(palavra);
+        selecionadas = [];
+      }
+    });
+  }
+
+  function atualizarLista(palavra) {
+    const itens = document.querySelectorAll('.words-to-find li');
+    itens.forEach(item => {
+      if (item.textContent === palavra) {
+        item.style.textDecoration = 'line-through';
+        item.style.color = 'green';
+      }
+    });
+  }
+

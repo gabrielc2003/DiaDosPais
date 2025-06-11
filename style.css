@@ -39,14 +39,14 @@ body {
 h2 {
     font-family: var(--fonte-principal);
     color: #3cc5e7; /* Cor do título */
-    font-size: 2.5rem; /* Tamanho do título */
+    font-size: 2.6rem; /* Tamanho do título */
     margin-bottom: 0px;
     margin-left: 30px;
-    min-height: 3em;
+    min-height: 1.5em;
     display: inline-block;
     overflow: hidden;
     white-space: nowrap;
-    width: 578px; /* ou defina um valor específico, tipo 400px */
+    width: 610px; /* ou defina um valor específico, tipo 400px */
     text-align: center;
 }
 
@@ -194,6 +194,16 @@ p.dedicatoria{
         margin-left: 15px; 
     }
 
+    h2{
+         margin-left: 25px; 
+         font-size: 1.5rem;
+         width: 188px;
+         display: block;
+         min-height: 3.5em;
+         white-space: normal;
+
+    }
+
 
 }
 
@@ -250,4 +260,57 @@ p.dedicatoria{
         transform: translateY(-100vh) rotate(-45deg); /* Sobe até o topo da tela */
         opacity: 0;
     }
+}
+
+/* jogo.html */
+
+.word-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 50px);
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.letter {
+  background-color: white;
+  border: 1px solid #aaa;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: default;
+  transition: background-color 0.2s;
+}
+
+.letter:hover {
+  background-color: #d0ebff;
+}
+
+.words-to-find {
+  background: #fff;
+  display: inline-block;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px #aaa;
+}
+
+.words-to-find ul {
+  list-style: none;
+  padding: 0;
+}
+
+.words-to-find li {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.selecionada {
+  background-color: #ffe066;
+}
+
+.encontrada {
+  background-color: #8ce99a !important;
+  color: white;
 }
