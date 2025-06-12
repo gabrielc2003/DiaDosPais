@@ -353,6 +353,12 @@ p.dedicatoria{
 
 /* ========== CELULAR (Vertical) ========== */
 @media (max-width: 480px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+
   .game-container {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -376,7 +382,7 @@ p.dedicatoria{
     padding: 0 15px;
     white-space: normal;
     word-wrap: break-word;
-     min-height: 2.9em;
+    min-height: 2.9em;
   }
 
   p#special-message {
