@@ -264,180 +264,127 @@ p.dedicatoria{
 }
 
 
+/* ========== ESTRUTURA BASE ========== */
 .game-container {
-    margin-left: 40px;
-    width: 500px;
-    display: grid;
-    grid-template-columns: repeat(2, 210px);
-    justify-content: center; /* Centraliza o jogo na tela */
-    text-align: center;
-    background: #0F1128;
-    border-radius: 10px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9);
-    z-index: 1; /* Fica abaixo da mensagem */
-    position: relative; /* Para contexto de empilhamento */
-    align-items: center; /* Ou stretch para preencher */
-    margin-top: 20px; /* Reduza se necessário */
-    grid-gap: 30px 30px; /* Espaçamento uniforme */
-    height: auto; /* Ou ajuste conforme necessidade */
-    padding: 20px 10px; /* Padding interno */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colunas no desktop */
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.card,
-.card .front,
-.card .back {
-  padding: 0;
-  margin: 0;
-  border: none;
-}
-
-
+/* ESTRUTURA DA CARTA CORRIGIDA */
 .card {
-    width: 220px;
-    height: 240px;
-    perspective: 1000px;
+  width: 100%;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  perspective: 1000px;
+  /* Novas propriedades para evitar distorção */
+  transform-origin: center;
+  box-sizing: border-box;
+  margin: 0 auto; /* Centraliza se necessário */
 }
 
-.card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: 10px;
-}
-
-.card .front, .card .back {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    backface-visibility: hidden;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.card .front, 
+.card .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  /* Garante que as faces não distorçam */
+  transform-style: preserve-3d;
+  box-sizing: border-box;
+  overflow: hidden; /* Evita vazamento de conteúdo */
 }
 
 .card .front {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
+  background: #fff; /* Cor de fundo para o verso */
+  z-index: 2;
+  transform: rotateY(0deg);
 }
 
 .card .back {
-    background-color: #0c62e2;
-    transform: rotateY(180deg);
-}
-
-.back { 
-    font-family:var(--fonte-secundaria);
-    font-size: 25px;
-    font-weight: bold;
+  background-color: #0c62e2;
+  transform: rotateY(180deg);
 }
 
 .card.flipped {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
-
-.card {
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.9s;
+/* IMAGEM - APENAS NO FRONT */
+.card .front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
-/* Ajustes para telas menores (celulares) */
-@media (max-width: 768px) {
-    .photo {
-        width: 120px; /* Reduz o tamanho das fotos */
-        margin-right: 10px; /* Reduz o espaço entre a foto e a mensagem */
-    }
-
-    .container {
-        padding: 10px;
-        width: 100%;
-    }
-
-    .btn {
-        font-size: 18px; /* Reduz um pouco o tamanho da fonte */
-        padding: 8px 16px; /* Reduz o tamanho do botão */
-        margin-left: 45px; 
-        width: 280px;
-        height: 40px;
-        
-    }
-    #btnPlay{
-        margin-left: 40px; 
-
-    }
-
-    p#special-message{
-        margin-left: 65px; 
-        margin-top: 30px; 
-        font-size: 1.6rem;
-
-    }
-
-    p{
-        margin-left: 15px; 
-    }
-
-    h2{
-         margin-left: 55px; 
-         font-size: 2.7rem;
-         width: 288px;
-         display: block;
-         min-height: 3.5em;
-         white-space: normal;
-
-    }
-
-    .card::before {
-        font-size: 40px;
-    }
-
-    .game-container {
-        margin-left: 40px;
-        margin-top: 30px;
-        width: 320px;
-        grid-gap: 10px 0px; 
-        padding: 10px 5px; 
-        grid-template-columns: repeat(2, 150px);
-        
-
-    }
-
-    .card{
-        width: 130px;
-        height: 140px;
-        margin-left: 11px;
-    }
-
-    .back { 
-        font-size: 15px;
-        
-    }
-
-
+/* TEXTO - APENAS NO BACK */
+.card .back {
+  font-family: var(--fonte-secundaria);
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+  padding: 15px;
+  text-align: center;
 }
 
-/* Para telas entre 640px e 747px */
-@media (min-width: 440px) and (max-width: 747px) {
-    h2 {
-        margin-left: 220px;
-        font-size: 2.5rem;
-        width: 180px;
-        min-height: 5em;
-        white-space: normal;
-    }
+/* MEDIA QUERIES (mantenha os que você já tem) */
+@media (max-width: 480px) {
+  .card {
+    height: 150px !important;
+  }
+  .card .back {
+    font-size: 18px;
+    padding: 10px;
+  }
 }
 
-/* Para telas entre 748px e 1024px (tablets) */
-@media (min-width: 748px) and (max-width: 1024px) {
-    h2 {
-        margin-left: 10px;
-        font-size: 2.5rem;
-        width: auto;
-        min-height: 1.5em;
-        white-space: nowrap;
-    }
+/* ========== CELULAR (Vertical) ========== */
+@media (max-width: 480px) {
+  .game-container {
+    grid-template-columns: repeat(2, 1fr) !important; /* 2 colunas */
+    gap: 10px !important;
+    padding: 10px !important;
+  }
+  
+  .card {
+    height: 150px !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+}
+
+/* ========== CELULAR (Horizontal) e TABLETS PEQUENOS ========== */
+@media (min-width: 481px) and (max-width: 768px) {
+  .game-container {
+    grid-template-columns: repeat(3, 1fr) !important; /* 3 colunas */
+    gap: 15px !important;
+  }
+  
+  .card {
+    height: 180px !important;
+  }
+}
+
+/* ========== TABLETS ========== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .game-container {
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas */
+  }
 }

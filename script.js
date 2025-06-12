@@ -111,6 +111,15 @@ function iniciarTela1() {
   function iniciarJogoCartas() {
     // Limpa o tabuleiro
     gameBoard.innerHTML = '';
+  
+  // Detecta dispositivo móvel
+  const isMobile = window.innerWidth <= 768;
+  
+  // Configurações dinâmicas
+  gameBoard.style.gridTemplateColumns = isMobile ? 
+    'repeat(2, 1fr)' : 'repeat(4, 1fr)';
+  
+  gameBoard.style.gap = isMobile ? '10px' : '20px';
     
     // Embaralha as imagens
     images.sort(() => 0.5 - Math.random());
