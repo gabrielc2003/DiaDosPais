@@ -352,11 +352,6 @@ p.dedicatoria{
         margin-right: 10px; /* Reduz o espaço entre a foto e a mensagem */
     }
 
-    .photo-message {
-        max-width: 150px; /* Reduz a largura máxima da mensagem */
-        font-size: 1.2rem;
-    }
-
     .container {
         padding: 10px;
         width: 100%;
@@ -365,13 +360,13 @@ p.dedicatoria{
     .btn {
         font-size: 18px; /* Reduz um pouco o tamanho da fonte */
         padding: 8px 16px; /* Reduz o tamanho do botão */
-        margin-left: 65px; 
+        margin-left: 45px; 
         width: 280px;
         height: 40px;
         
     }
     #btnPlay{
-        margin-left: 60px; 
+        margin-left: 40px; 
 
     }
 
@@ -387,8 +382,8 @@ p.dedicatoria{
     }
 
     h2{
-         margin-left: 85px; 
-         font-size: 2rem;
+         margin-left: 55px; 
+         font-size: 2.7rem;
          width: 288px;
          display: block;
          min-height: 3.5em;
@@ -401,7 +396,7 @@ p.dedicatoria{
     }
 
     .game-container {
-        margin-left: 70px;
+        margin-left: 40px;
         margin-top: 30px;
         width: 320px;
         grid-gap: 10px 0px; 
@@ -415,6 +410,11 @@ p.dedicatoria{
         width: 130px;
         height: 140px;
         margin-left: 11px;
+    }
+
+    .back { 
+        font-size: 15px;
+        
     }
 
 

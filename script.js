@@ -28,41 +28,60 @@ function iniciarTela1() {
   }
 
   // Efeito de máquina de escrever
-  function typeWriterLoop(element, messages, speed = 100, pause = 1500) {
+ function typeWriterLoop(element, messages, speed = 100, pause = 1500) {
     let msgIndex = 0;
     let charIndex = 0;
     let typing = true;
+    let lastTime = 0;
+    let isRunning = true;
 
-    function type() {
-      const currentText = messages[msgIndex];
-      if (typing) {
-        if (charIndex <= currentText.length) {
-          element.innerHTML = currentText.substring(0, charIndex);
-          charIndex++;
-          setTimeout(type, speed);
-        } else {
-          typing = false;
-          setTimeout(type, pause);
+    function type(timestamp) {
+        if (!isRunning) return;
+
+        if (!lastTime) lastTime = timestamp;
+        const delta = timestamp - lastTime;
+
+        const currentText = messages[msgIndex];
+        const delay = typing ? speed : speed / 2;
+
+        if (delta >= delay) {
+            lastTime = timestamp;
+
+            if (typing) {
+                if (charIndex <= currentText.length) {
+                    element.textContent = currentText.substring(0, charIndex);
+                    charIndex++;
+                } else {
+                    typing = false;
+                    lastTime = timestamp + pause;
+                }
+            } else {
+                if (charIndex >= 0) {
+                    element.textContent = currentText.substring(0, charIndex);
+                    charIndex--;
+                } else {
+                    typing = true;
+                    msgIndex = (msgIndex + 1) % messages.length;
+                }
+            }
         }
-      } else {
-        if (charIndex >= 0) {
-          element.innerHTML = currentText.substring(0, charIndex);
-          charIndex--;
-          setTimeout(type, speed / 2);
-        } else {
-          typing = true;
-          msgIndex = (msgIndex + 1) % messages.length;
-          setTimeout(type, speed);
+
+        if (isRunning) {
+            requestAnimationFrame(type);
         }
-      }
     }
-    type();
-  }
+
+    requestAnimationFrame(type);
+
+    return () => {
+        isRunning = false;
+    };
+}
 
   // ========== CONFIGURAÇÃO DO JOGO ==========
 
   // Dados das cartas
-  const images = ["clo1.jpg", "clo2.jpg", "clo3.jpg", "clo4.jpg"];
+  const images = ["clo1.jpg", "clo2.jpg", "clo3.jpg", "clo4.jpg"]; // Corrigido "cio3.jpg" para "clo3.jpg"
   const frases = [
     "Te amo pai ❤️",
     "Obrigada por tudo!",
