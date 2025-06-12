@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quebra-Cabeça com Imagem</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    #puzzle {
+        margin-top: 100px;
+      width: 90vw;
+      height: 90vw;
+      max-width: 400px;
+      max-height: 400px;
+      display: flex;
+      flex-wrap: wrap;
+      border: 3px solid #333;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .piece {
+      width: 25%;
+      height: 25%;
+      background-image: url('clo3.jpg'); /* Troque o nome se necessário */
+      background-size: 400% 400%;
+      border: 1px solid #999;
+      cursor: pointer;
+      transition: border 0.2s;
+    }
+
+    .piece.selected {
+      border: 3px solid red;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    #message {
+      margin-top: 10px;
+      font-weight: bold;
+      color: green;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧩 Quebra-Cabeça com Imagem</h1>
+  <div id="puzzle"></div>
+  <button onclick="shuffle()">🔄 Reiniciar</button>
+  <div id="message"></div>
+
+  <script>
+    const puzzle = document.getElementById('puzzle');
+    const message = document.getElementById('message');
+    const totalPieces = 16; // 4x4
+    const positions = [];
+    let firstPiece = null;
+
+    function createPuzzle() {
+      for (let i = 0; i < totalPieces; i++) {
+        const piece = document.createElement('div');
+        piece.classList.add('piece');
+        const row = Math.floor(i / 4);
+        const col = i % 4;
+        piece.style.backgroundPosition = `${-col * 100}% ${-row * 100}%`;
+        piece.dataset.index = i;
+        puzzle.appendChild(piece);
+        positions.push(i);
+      }
+    }
+
+    function shuffle() {
+      const pieces = Array.from(puzzle.children);
+      const shuffled = [...positions].sort(() => Math.random() - 0.5);
+      shuffled.forEach((newPos, i) => {
+        pieces[i].style.order = newPos;
+        pieces[i].dataset.order = newPos;
+      });
+      firstPiece = null;
+      message.textContent = '';
+    }
+
+    function checkWin() {
+      const pieces = Array.from(puzzle.children);
+      const win = pieces.every(piece => piece.dataset.index === piece.dataset.order);
+      if (win) {
+        message.textContent = '✅ Parabéns! Você completou o quebra-cabeça!';
+      }
+    }
+
+    puzzle.addEventListener('click', (e) => {
+      const target = e.target;
+      if (!target.classList.contains('piece')) return;
+
+      if (!firstPiece) {
+        firstPiece = target;
+        firstPiece.classList.add('selected');
+      } else {
+        const tempOrder = firstPiece.style.order;
+        firstPiece.style.order = target.style.order;
+        target.style.order = tempOrder;
+
+        const tempData = firstPiece.dataset.order;
+        firstPiece.dataset.order = target.dataset.order;
+        target.dataset.order = tempData;
+
+        firstPiece.classList.remove('selected');
+        firstPiece = null;
+
+        checkWin();
+      }
+    });
+
+    createPuzzle();
+    shuffle();
+  </script>
+</body>
+</html>

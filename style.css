@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Edu+QLD+Hand:wght@400..700&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Edu+NSW+ACT+Hand+Pre:wght@400..700&family=Edu+QLD+Hand:wght@400..700&family=Outfit:wght@100..900&display=swap');@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Edu+QLD+Hand:wght@400..700&family=Outfit:wght@100..900&display=swap');
 
 :root{
     --cor-primaria: #CFE5F0; 
@@ -8,7 +8,7 @@
     --cor-cabecalho: #c5e0e7;
 
     --fonte-principal: 'Share Tech', sans-serif;
-    --fonte-secundaria: 'Dancing Script', serif;
+    --fonte-secundaria: 'Edu QLD Hand', serif;
     --fonte-paragrafo: 'Outfit', serif;
 
 }
@@ -41,12 +41,12 @@ h2 {
     color: #3cc5e7; /* Cor do título */
     font-size: 2.6rem; /* Tamanho do título */
     margin-bottom: 0px;
-    margin-left: 30px;
+    margin-left: 10px;
     min-height: 1.5em;
     display: inline-block;
     overflow: hidden;
     white-space: nowrap;
-    width: 610px; /* ou defina um valor específico, tipo 400px */
+    width: 620px; /* ou defina um valor específico, tipo 400px */
     text-align: center;
 }
 
@@ -63,14 +63,15 @@ p {
 }
 
 p#special-message{
-    margin-left: 95px; 
+    margin-left: 35px; 
     margin-top: 30px; 
     font-size: 1.6rem;
 
 }
 
 p.dedicatoria{
-    margin-top: 0;
+     margin-left: 35px; 
+     margin-top: 0;
      font-size: 1.3rem;
 }
 
@@ -88,7 +89,7 @@ p.dedicatoria{
 }
 
 #btnPlay{
-    margin-left: 55px; 
+    margin-left: 35px; 
 
 }
 
@@ -143,7 +144,7 @@ p.dedicatoria{
     font-size: 18px;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-left: 95px;
+    margin-left: 35px;
     font-family: var(--fonte-principal);
 }
 
@@ -152,87 +153,6 @@ p.dedicatoria{
     background-color: #3cc5e7;
    
 }
-
-/* Ajustes para telas menores (celulares) */
-@media (max-width: 768px) {
-    .photo {
-        width: 120px; /* Reduz o tamanho das fotos */
-        margin-right: 10px; /* Reduz o espaço entre a foto e a mensagem */
-    }
-
-    .photo-message {
-        max-width: 150px; /* Reduz a largura máxima da mensagem */
-        font-size: 1.2rem;
-    }
-
-    .container {
-        padding: 10px;
-        width: 100%;
-    }
-
-    .btn {
-        font-size: 18px; /* Reduz um pouco o tamanho da fonte */
-        padding: 8px 16px; /* Reduz o tamanho do botão */
-        margin-left: 15px; 
-        width: 280px;
-        height: 40px;
-        
-    }
-    #btnPlay{
-        margin-left: 15px; 
-
-    }
-
-    p#special-message{
-        margin-left: 15px; 
-        margin-top: 30px; 
-        font-size: 1.6rem;
-
-    }
-
-    p{
-        margin-left: 15px; 
-    }
-
-    h2{
-         margin-left: 85px; 
-         font-size: 2rem;
-         width: 188px;
-         display: block;
-         min-height: 3.5em;
-         white-space: normal;
-
-    }
-
-
-}
-
-/* Para telas entre 640px e 747px */
-@media (min-width: 440px) and (max-width: 747px) {
-    h2 {
-        margin-left: 220px;
-        font-size: 2.5rem;
-        width: 180px;
-        min-height: 5em;
-        white-space: normal;
-    }
-}
-
-/* Para telas entre 748px e 1024px (tablets) */
-@media (min-width: 748px) and (max-width: 1024px) {
-    h2 {
-        margin-left: 10px;
-        font-size: 2.5rem;
-        width: auto;
-        min-height: 1.5em;
-        white-space: nowrap;
-    }
-}
-
-
-
-
-
 
 
 /* Container dos corações */
@@ -341,4 +261,183 @@ p.dedicatoria{
 .encontrada {
   background-color: #8ce99a !important;
   color: white;
+}
+
+
+.game-container {
+    margin-left: 40px;
+    width: 500px;
+    display: grid;
+    grid-template-columns: repeat(2, 210px);
+    justify-content: center; /* Centraliza o jogo na tela */
+    text-align: center;
+    background: #0F1128;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9);
+    z-index: 1; /* Fica abaixo da mensagem */
+    position: relative; /* Para contexto de empilhamento */
+    align-items: center; /* Ou stretch para preencher */
+    margin-top: 20px; /* Reduza se necessário */
+    grid-gap: 30px 30px; /* Espaçamento uniforme */
+    height: auto; /* Ou ajuste conforme necessidade */
+    padding: 20px 10px; /* Padding interno */
+}
+
+.card,
+.card .front,
+.card .back {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+
+.card {
+    width: 220px;
+    height: 240px;
+    perspective: 1000px;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+}
+
+.card .front, .card .back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card .front {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.card .back {
+    background-color: #0c62e2;
+    transform: rotateY(180deg);
+}
+
+.back { 
+    font-family:var(--fonte-secundaria);
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+
+.card {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.9s;
+}
+
+/* Ajustes para telas menores (celulares) */
+@media (max-width: 768px) {
+    .photo {
+        width: 120px; /* Reduz o tamanho das fotos */
+        margin-right: 10px; /* Reduz o espaço entre a foto e a mensagem */
+    }
+
+    .photo-message {
+        max-width: 150px; /* Reduz a largura máxima da mensagem */
+        font-size: 1.2rem;
+    }
+
+    .container {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .btn {
+        font-size: 18px; /* Reduz um pouco o tamanho da fonte */
+        padding: 8px 16px; /* Reduz o tamanho do botão */
+        margin-left: 65px; 
+        width: 280px;
+        height: 40px;
+        
+    }
+    #btnPlay{
+        margin-left: 60px; 
+
+    }
+
+    p#special-message{
+        margin-left: 65px; 
+        margin-top: 30px; 
+        font-size: 1.6rem;
+
+    }
+
+    p{
+        margin-left: 15px; 
+    }
+
+    h2{
+         margin-left: 85px; 
+         font-size: 2rem;
+         width: 288px;
+         display: block;
+         min-height: 3.5em;
+         white-space: normal;
+
+    }
+
+    .card::before {
+        font-size: 40px;
+    }
+
+    .game-container {
+        margin-left: 70px;
+        margin-top: 30px;
+        width: 320px;
+        grid-gap: 10px 0px; 
+        padding: 10px 5px; 
+        grid-template-columns: repeat(2, 150px);
+        
+
+    }
+
+    .card{
+        width: 130px;
+        height: 140px;
+        margin-left: 11px;
+    }
+
+
+}
+
+/* Para telas entre 640px e 747px */
+@media (min-width: 440px) and (max-width: 747px) {
+    h2 {
+        margin-left: 220px;
+        font-size: 2.5rem;
+        width: 180px;
+        min-height: 5em;
+        white-space: normal;
+    }
+}
+
+/* Para telas entre 748px e 1024px (tablets) */
+@media (min-width: 748px) and (max-width: 1024px) {
+    h2 {
+        margin-left: 10px;
+        font-size: 2.5rem;
+        width: auto;
+        min-height: 1.5em;
+        white-space: nowrap;
+    }
 }
