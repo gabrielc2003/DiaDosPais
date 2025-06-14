@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quebra-Cabeça com Imagem</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <title>Quebra-Cabeça</title>
   <style>
     * {
       box-sizing: border-box;
@@ -43,12 +44,17 @@
     #puzzle {
       width: 100%;
       height: 0;
-      padding-bottom: 100%; /* Mantém proporção quadrada */
+      padding-bottom: 100%;
       display: flex;
       flex-wrap: wrap;
       border: 3px solid #333;
       margin-bottom: 15px;
       position: relative;
+    }
+
+    #puzzle.grayscale .piece {
+      filter: grayscale(100%);
+      transition: filter 0.5s ease;
     }
 
     .piece {
@@ -93,12 +99,11 @@
       min-height: 20px;
     }
 
-    /* Ajustes para telas muito pequenas */
     @media (max-width: 350px) {
       h1 {
         font-size: 1.3rem;
       }
-      
+
       button {
         padding: 10px 15px;
         font-size: 0.9rem;
@@ -108,9 +113,9 @@
 </head>
 <body>
   <div class="container">
-    <h1>🧩 Quebra-Cabeça com Imagem</h1>
-    <div id="puzzle"></div>
-    <button onclick="shuffle()">🔄 Embaralhar</button>
+    <h1>Encontre as peças e monte a nossa foto!</h1>
+    <div id="puzzle" class="grayscale"></div>
+    <button onclick="shuffle()">Embaralhar</button>
     <div id="message"></div>
   </div>
 
@@ -122,39 +127,42 @@
     let firstPiece = null;
 
     function createPuzzle() {
-      puzzle.innerHTML = ''; // Limpa peças existentes
-      positions.length = 0; // Limpa array de posições
       
+      puzzle.innerHTML = '';
+      positions.length = 0;
+
       const puzzleWidth = puzzle.offsetWidth;
       const pieceSize = puzzleWidth / 4;
-      
+
+      puzzle.classList.add('grayscale');
+
       for (let i = 0; i < totalPieces; i++) {
         const piece = document.createElement('div');
         piece.classList.add('piece');
         const row = Math.floor(i / 4);
         const col = i % 4;
-        
-        // Posiciona as peças absolutamente dentro do container
+
         piece.style.width = `${pieceSize}px`;
         piece.style.height = `${pieceSize}px`;
         piece.style.left = `${col * pieceSize}px`;
         piece.style.top = `${row * pieceSize}px`;
-        
+
         piece.style.backgroundPosition = `${-col * 100}% ${-row * 100}%`;
         piece.dataset.index = i;
         piece.dataset.order = i;
         puzzle.appendChild(piece);
         positions.push(i);
       }
+      shuffle();
     }
 
     function shuffle() {
       const pieces = Array.from(puzzle.children);
       const shuffled = [...positions].sort(() => Math.random() - 0.5);
-      
+
       const puzzleWidth = puzzle.offsetWidth;
       const pieceSize = puzzleWidth / 4;
-      
+
       shuffled.forEach((newPos, i) => {
         const row = Math.floor(newPos / 4);
         const col = newPos % 4;
@@ -162,7 +170,7 @@
         pieces[i].style.top = `${row * pieceSize}px`;
         pieces[i].dataset.order = newPos;
       });
-      
+
       firstPiece = null;
       message.textContent = '';
     }
@@ -171,9 +179,24 @@
       const pieces = Array.from(puzzle.children);
       const win = pieces.every(piece => piece.dataset.index === piece.dataset.order);
       if (win) {
-        message.textContent = '✅ Parabéns! Você completou o quebra-cabeça!';
+        puzzle.classList.remove('grayscale');
+        setTimeout(() => {
+          Swal.fire({
+            title: "Parabéns!",
+            text: "Você completou o quebra-cabeças!",
+            icon: "success",
+            confirmButtonText: "Jogar novamente",
+            background: "#0F1128",
+            color: "white"
+          }).then(() => {
+            createPuzzle();
+            shuffle();
+          });
+        }, 2000); // 3 segundos de espera antes de mostrar o alerta
       }
+      
     }
+
 
     puzzle.addEventListener('click', (e) => {
       const target = e.target;
@@ -183,15 +206,14 @@
         firstPiece = target;
         firstPiece.classList.add('selected');
       } else {
-        // Troca as posições
         const tempLeft = firstPiece.style.left;
         const tempTop = firstPiece.style.top;
         const tempOrder = firstPiece.dataset.order;
-        
+
         firstPiece.style.left = target.style.left;
         firstPiece.style.top = target.style.top;
         firstPiece.dataset.order = target.dataset.order;
-        
+
         target.style.left = tempLeft;
         target.style.top = tempTop;
         target.dataset.order = tempOrder;
@@ -203,7 +225,6 @@
       }
     });
 
-    // Inicializa o puzzle e adiciona listener para redimensionamento
     window.addEventListener('load', createPuzzle);
     window.addEventListener('resize', createPuzzle);
   </script>

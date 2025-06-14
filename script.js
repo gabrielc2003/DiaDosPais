@@ -19,14 +19,15 @@ function iniciarTela1() {
   function exibirAlertaInicial() {
     setTimeout(() => {
         Swal.fire({
-            title: "Dica!",
-            text: "Clique nas fotos interativas e se surpreenda!",
-            toast: true,          
-            position: "top-end",   
-            showConfirmButton: false, // Remove o botão "Entendi"
-            timer: 3000,           // Fecha automaticamente após 5 segundos
-            timerProgressBar: true, // Barra de progresso do timer
-            background: "#0c62e2", 
+            toast: true,
+            position: "top-end",
+            text: "Clique nas fotos!",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            background: "#0c62e2",
+            color:"#CFE5F0",
+            width: 190,
         });
     }, 3000); // 3 segundos = 3000 milissegundos
 }
