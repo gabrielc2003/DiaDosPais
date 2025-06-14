@@ -369,7 +369,7 @@ p.dedicatoria{
     gap: 10px;
     padding: 10px;
     width: 90%;
-    margin-left: 10px;
+    margin-left: 7px;
   }
 
   .card {
@@ -389,6 +389,11 @@ p.dedicatoria{
     word-wrap: break-word;
     min-height: 2.9em;
   }
+
+  p.dedicatoria{
+     margin-left: 15px; 
+    
+}
 
   p#special-message {
     text-align: center;
