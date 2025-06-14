@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quebra-Cabeça com Imagem</title>
   <style>
     * {
@@ -21,6 +22,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 10px;
     }
 
     .container {
@@ -28,36 +30,36 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
       width: 100%;
+      max-width: 500px;
     }
 
     h1 {
-      font-size: 2rem;
-      margin-bottom: 20px;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
       text-align: center;
     }
 
     #puzzle {
-      width: 90vw;
-      height: 90vw;
-      max-width: 500px;
-      max-height: 500px;
+      width: 100%;
+      height: 0;
+      padding-bottom: 100%; /* Mantém proporção quadrada */
       display: flex;
       flex-wrap: wrap;
       border: 3px solid #333;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       position: relative;
     }
 
     .piece {
       width: 25%;
       height: 25%;
-      background-image: url('clo3.jpg'); /* Substitua pelo caminho correto */
+      background-image: url('clo3.jpg');
       background-size: 400% 400%;
       border: 1px solid #999;
       cursor: pointer;
       transition: border 0.2s;
+      position: absolute;
     }
 
     .piece.selected {
@@ -65,16 +67,16 @@
     }
 
     button {
-      padding: 10px 20px;
-      font-size: 1.2rem;
+      padding: 12px 20px;
+      font-size: 1rem;
       background: #007bff;
       color: white;
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      width: 90vw;
+      width: 100%;
       max-width: 300px;
-      height: 60px;
+      margin-top: 10px;
     }
 
     button:hover {
@@ -82,37 +84,24 @@
     }
 
     #message {
-      margin-top: 10px;
+      margin-top: 15px;
       font-weight: bold;
       color: #00ff00;
       text-align: center;
-      font-size: 1rem;
+      font-size: 0.9rem;
       padding: 0 10px;
+      min-height: 20px;
     }
 
-    /* Responsividade */
-    @media (max-width: 480px) {
+    /* Ajustes para telas muito pequenas */
+    @media (max-width: 350px) {
       h1 {
-        font-size: 1.6rem;
-        margin: 10px 0;
+        font-size: 1.3rem;
       }
-
-      #puzzle {
-        width: 85vw;
-        height: 85vw;
-        max-width: 85vw;
-        max-height: 85vw;
-      }
-
+      
       button {
-        font-size: 1.4rem;
-        height: 60px;
-        margin: 10px 0;
-      }
-
-      #message {
-        font-size: 1rem;
-        margin-bottom: 10px;
+        padding: 10px 15px;
+        font-size: 0.9rem;
       }
     }
   </style>
@@ -133,13 +122,27 @@
     let firstPiece = null;
 
     function createPuzzle() {
+      puzzle.innerHTML = ''; // Limpa peças existentes
+      positions.length = 0; // Limpa array de posições
+      
+      const puzzleWidth = puzzle.offsetWidth;
+      const pieceSize = puzzleWidth / 4;
+      
       for (let i = 0; i < totalPieces; i++) {
         const piece = document.createElement('div');
         piece.classList.add('piece');
         const row = Math.floor(i / 4);
         const col = i % 4;
+        
+        // Posiciona as peças absolutamente dentro do container
+        piece.style.width = `${pieceSize}px`;
+        piece.style.height = `${pieceSize}px`;
+        piece.style.left = `${col * pieceSize}px`;
+        piece.style.top = `${row * pieceSize}px`;
+        
         piece.style.backgroundPosition = `${-col * 100}% ${-row * 100}%`;
         piece.dataset.index = i;
+        piece.dataset.order = i;
         puzzle.appendChild(piece);
         positions.push(i);
       }
@@ -148,10 +151,18 @@
     function shuffle() {
       const pieces = Array.from(puzzle.children);
       const shuffled = [...positions].sort(() => Math.random() - 0.5);
+      
+      const puzzleWidth = puzzle.offsetWidth;
+      const pieceSize = puzzleWidth / 4;
+      
       shuffled.forEach((newPos, i) => {
-        pieces[i].style.order = newPos;
+        const row = Math.floor(newPos / 4);
+        const col = newPos % 4;
+        pieces[i].style.left = `${col * pieceSize}px`;
+        pieces[i].style.top = `${row * pieceSize}px`;
         pieces[i].dataset.order = newPos;
       });
+      
       firstPiece = null;
       message.textContent = '';
     }
@@ -172,13 +183,18 @@
         firstPiece = target;
         firstPiece.classList.add('selected');
       } else {
-        const tempOrder = firstPiece.style.order;
-        firstPiece.style.order = target.style.order;
-        target.style.order = tempOrder;
-
-        const tempData = firstPiece.dataset.order;
+        // Troca as posições
+        const tempLeft = firstPiece.style.left;
+        const tempTop = firstPiece.style.top;
+        const tempOrder = firstPiece.dataset.order;
+        
+        firstPiece.style.left = target.style.left;
+        firstPiece.style.top = target.style.top;
         firstPiece.dataset.order = target.dataset.order;
-        target.dataset.order = tempData;
+        
+        target.style.left = tempLeft;
+        target.style.top = tempTop;
+        target.dataset.order = tempOrder;
 
         firstPiece.classList.remove('selected');
         firstPiece = null;
@@ -187,8 +203,9 @@
       }
     });
 
-    createPuzzle();
-    shuffle();
+    // Inicializa o puzzle e adiciona listener para redimensionamento
+    window.addEventListener('load', createPuzzle);
+    window.addEventListener('resize', createPuzzle);
   </script>
 </body>
 </html>
