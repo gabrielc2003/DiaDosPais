@@ -356,9 +356,8 @@ p.dedicatoria{
 
   body {
     overflow-x: hidden;
-    overflow-y: hidden;
     
-    
+   
   }
 
   .card {
@@ -370,18 +369,49 @@ p.dedicatoria{
     padding: 10px;
   }
 
-  .container{
+ * {
+  box-sizing: border-box;
+}
+
+/* Container principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  width: 90%;
+  box-sizing: border-box;
+}
+
+/* Game container */
+.game-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+  /* REMOVA as regras .buttons-container existentes e substitua por: */
+  .buttons-container {
+    display: flex;
+    justify-content: center;
     gap: 10px;
-    padding: 10px;
-    width: 90%;
-    
+    margin: 5px 0 15px 0; /* margem superior reduzida e inferior aumentada */
+    width: 100%;
+    position: static; /* remove posicionamento absoluto */
+    left: auto;
+    bottom: auto;
+    transform: none;
+    z-index: auto;
   }
-  .game-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    padding: 10px;
-    width: 90%;
-    margin-left: 7px;
+
+  #btnPlay, #btnPause {
+    width: 45px !important; /* um pouco maiores em mobile */
+    height: 45px !important;
+    margin: 0 !important; /* remove margens individuais */
   }
 
   .card {
@@ -393,7 +423,7 @@ p.dedicatoria{
   h2 {
     font-size: 2rem !important;
     text-align: center;
-    margin-left: 0 !important;
+    margin-left: 10px;
     width: 90% !important;
     display: block;
     padding: 0 15px;
@@ -403,7 +433,7 @@ p.dedicatoria{
   }
 
   p.dedicatoria {
-    margin-left: 15px;
+    margin-left: 5px;
     margin-bottom: 0px;
   }
 
@@ -419,30 +449,6 @@ p.dedicatoria{
     margin:15px auto !important;
     margin-top: 1px !important;
     width: 80%;
-  }
-
-  #btnPlay {
-    margin-left: 15px !important;
-    margin-right: auto !important;
-    width: 40px !important;
-    height: 40px !important;
-  }
-
-  #btnPause {
-    width: 40px !important;
-    height: 40px !important;
-  }
-
-   .swal2-title {
-    font-family: 'Arial', sans-serif;
-    font-size: 1.5em;
-    font-weight: 600;
-    text-align: center;
-    margin: 0 auto 0.4em;
-    padding: 0 10px;
-    line-height: 1.2;
-    word-wrap: break-word;
-    white-space: normal;
   }
 
 
