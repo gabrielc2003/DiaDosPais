@@ -359,6 +359,7 @@ p.dedicatoria{
   padding: 0;
   box-sizing: border-box;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
   .card {
@@ -419,17 +420,17 @@ p.dedicatoria{
     margin: 0 auto;
   }
 
-  h2 {
-    font-size: 2rem !important;
-    text-align: center;
-    margin-left: 10px;
-    width: 90% !important;
-    display: block;
-    padding: 0 15px;
-    white-space: normal;
-    word-wrap: break-word;
-    min-height: 2.5em;
-  }
+ h2 {
+  font-size: 2rem !important;
+  text-align: center;
+  width: 90% !important;
+  margin: -10px auto 0 auto; /* sobe e centraliza */
+  display: block;
+  padding: 0 15px;
+  white-space: normal;
+  word-wrap: break-word;
+  min-height: 2.5em;
+}
 
   p.dedicatoria {
     margin-left: 5px;
@@ -536,6 +537,6 @@ p.dedicatoria{
 }
 
 
-* {
+/* * {
   outline: 1px solid red;
-}
+} */
