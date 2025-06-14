@@ -441,6 +441,20 @@ p.dedicatoria{
     width: 40px !important;
     height: 40px !important;
   }
+
+   .swal2-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5em;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 auto 0.4em;
+    padding: 0 10px;
+    line-height: 1.2;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+
+
 }
 
 /* ========== CELULAR (Horizontal) e TABLETS PEQUENOS ========== */
