@@ -377,7 +377,6 @@ p.dedicatoria{
 
   body {
     overflow-x: hidden;
-    overflow-y: hidden;
   }
 
   .card {
@@ -404,6 +403,7 @@ p.dedicatoria{
   }
 
   h2 {
+    margin-top: 0px;
     font-size: 2rem !important;
     text-align: center;
     margin-left: 0 !important;
