@@ -377,7 +377,7 @@ p.dedicatoria{
 
   body {
     overflow-x: hidden;
-    overflow-y: hidden;
+    
     
   }
 
@@ -414,7 +414,7 @@ p.dedicatoria{
     padding: 0 15px;
     white-space: normal;
     word-wrap: break-word;
-    min-height: 2.9em;
+    min-height: 2.5em;
   }
 
   p.dedicatoria {
