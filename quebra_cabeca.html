@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Quebra-Cabeça com Imagem</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * {
       box-sizing: border-box;
@@ -12,44 +13,34 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow-x: hidden;
-    }
-
-    body {
-      font-family: sans-serif;
       background: #0F1128;
+      font-family: sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
     }
 
     h1 {
-      margin-bottom: 20px;
-      text-align: center;
-      font-size: 2rem;
       color: white;
-      padding: 0 10px;
+      font-size: 2rem;
+      margin: 20px 10px 10px;
+      text-align: center;
     }
 
     #puzzle {
-      width: 95vw;
-      height: 95vw;
-      max-width: 500px;
-      max-height: 500px;
       display: flex;
       flex-wrap: wrap;
+      width: 90vw;
+      height: 90vw;
+      max-width: 500px;
+      max-height: 500px;
       border: 3px solid #333;
-      margin-bottom: 20px;
-      position: relative;
     }
 
     .piece {
       width: 25%;
       height: 25%;
-      background-image: url('clo3.jpg'); /* Substitua pelo caminho correto */
+      background-image: url('clo3.jpg'); /* Troque se necessário */
       background-size: 400% 400%;
       border: 1px solid #999;
       cursor: pointer;
@@ -61,56 +52,51 @@
     }
 
     button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background: #007bff;
-      color: white;
+      margin-top: 15px;
+      padding: 15px 20px;
+      font-size: 1.2rem;
       border: none;
       border-radius: 6px;
+      background-color: #007bff;
+      color: white;
       cursor: pointer;
-      margin: 10px 0;
+      width: 90vw;
+      max-width: 500px;
     }
 
     button:hover {
-      background: #0056b3;
+      background-color: #0056b3;
     }
 
     #message {
-      margin-top: 10px;
+      margin-top: 15px;
+      font-size: 1rem;
       font-weight: bold;
       color: #00ff00;
       text-align: center;
+      padding: 0 10px;
+      max-width: 500px;
     }
 
-    /* Responsivo para celular */
     @media (max-width: 480px) {
-      body {
-        padding: 10px;
-        justify-content: flex-start;
-      }
-
       h1 {
-        font-size: 1.6rem;
-        margin: 10px 0;
+        font-size: 1.5rem;
+        margin-top: 10px;
       }
 
       #puzzle {
-        width: 90vw;
-        height: 90vw;
-        max-width: none;
-        max-height: none;
-        margin: 10px 0;
+        width: 95vw;
+        height: 95vw;
       }
 
       button {
-        width: 90vw;
-        height: 60px;
-        font-size: 1.4rem;
+        font-size: 1rem;
+        width: 150px;
+        height: 55px;
       }
 
       #message {
         font-size: 1rem;
-        padding: 0 10px;
         margin-bottom: 10px;
       }
     }
