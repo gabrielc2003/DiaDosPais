@@ -17,15 +17,19 @@ function iniciarTela1() {
 
  // Função para exibir o alerta após 10 segundos
   function exibirAlertaInicial() {
-      setTimeout(() => {
-          Swal.fire({
-              title: "Importante!",
-              text: "Clique nas fotos interativas e se surpreenda!",
-              icon: "info",
-              confirmButtonText: "Entendi"
-          });
-      }, 3000); // 10 segundos = 10000 milissegundos
-  }
+    setTimeout(() => {
+        Swal.fire({
+            title: "Dica!",
+            text: "Clique nas fotos interativas e se surpreenda!",
+            toast: true,          
+            position: "top-end",   
+            showConfirmButton: false, // Remove o botão "Entendi"
+            timer: 3000,           // Fecha automaticamente após 5 segundos
+            timerProgressBar: true, // Barra de progresso do timer
+            background: "#0c62e2", 
+        });
+    }, 3000); // 3 segundos = 3000 milissegundos
+}
 
 // Chamar a função quando a página carregar
 window.onload = exibirAlertaInicial;
