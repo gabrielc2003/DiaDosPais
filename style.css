@@ -377,6 +377,8 @@ p.dedicatoria{
 
   body {
     overflow-x: hidden;
+    overflow-y: hidden;
+    
   }
 
   .card {
@@ -429,7 +431,8 @@ p.dedicatoria{
   }
 
   .btn {
-    margin: 15px auto !important;
+    margin:15px auto !important;
+    margin-top: 1px !important;
     width: 80%;
   }
 
