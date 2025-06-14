@@ -424,6 +424,7 @@ p.dedicatoria{
     margin-left: 0 !important;
     padding: 0 15px;
     font-size: 1.4rem;
+    margin-top: 2px;
   }
 
   .btn, #btnPlay, #btnPause {
