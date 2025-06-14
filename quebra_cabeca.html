@@ -83,13 +83,20 @@
     }
 
     @media (max-width: 480px) {
+      body{
+        overflow-y: hidden;
+        overflow-x: hidden;
+
+      }
+
       h1 {
         font-size: 1.6rem;
       }
 
       button {
-        width: 90%;
-        font-size: 1rem;
+        width: 190px;
+        height: 190px;
+        font-size: 3rem;
       }
 
       #message {
@@ -98,8 +105,8 @@
       }
 
        #puzzle {
-        width: 400px;
-        height: 400px;
+        width: 1700px;
+        height: 1700px;
       }
     }
   </style>
@@ -107,7 +114,7 @@
 <body>
   <h1>🧩 Quebra-Cabeça com Imagem</h1>
   <div id="puzzle"></div>
-  <button onclick="shuffle()">🔄 Reiniciar</button>
+  <button onclick="shuffle()">🔄 Embaralhar</button>
   <div id="message"></div>
 
   <script>
