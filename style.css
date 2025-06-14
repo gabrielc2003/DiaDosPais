@@ -417,6 +417,7 @@ p.dedicatoria{
 
   p.dedicatoria {
     margin-left: 15px;
+    margin-bottom: 0px;
   }
 
   p#special-message {
@@ -424,10 +425,10 @@ p.dedicatoria{
     margin-left: 0 !important;
     padding: 0 15px;
     font-size: 1.4rem;
-    margin-top: 2px;
+    margin-top: 3px;
   }
 
-  .btn, #btnPlay, #btnPause {
+  .btn {
     margin: 15px auto !important;
     width: 80%;
   }
