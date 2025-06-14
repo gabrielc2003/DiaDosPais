@@ -35,22 +35,21 @@
     }
 
     #puzzle {
-    width: 95vw;
-    height: 95vw;
-    max-width: 500px;
-    max-height: 500px;
-    display: flex;
-    flex-wrap: wrap;
-    border: 3px solid #333;
-    margin-bottom: 20px;
-    position: relative;
+      width: 95vw;
+      height: 95vw;
+      max-width: 500px;
+      max-height: 500px;
+      display: flex;
+      flex-wrap: wrap;
+      border: 3px solid #333;
+      margin-bottom: 20px;
+      position: relative;
     }
-
 
     .piece {
       width: 25%;
       height: 25%;
-      background-image: url('clo3.jpg'); /* Substitua se necessário */
+      background-image: url('clo3.jpg'); /* Substitua pelo caminho correto */
       background-size: 400% 400%;
       border: 1px solid #999;
       cursor: pointer;
@@ -69,6 +68,7 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      margin: 10px 0;
     }
 
     button:hover {
@@ -82,31 +82,36 @@
       text-align: center;
     }
 
+    /* Responsivo para celular */
     @media (max-width: 480px) {
-      body{
-        overflow-y: hidden;
-        overflow-x: hidden;
-
+      body {
+        padding: 10px;
+        justify-content: flex-start;
       }
 
       h1 {
         font-size: 1.6rem;
+        margin: 10px 0;
+      }
+
+      #puzzle {
+        width: 90vw;
+        height: 90vw;
+        max-width: none;
+        max-height: none;
+        margin: 10px 0;
       }
 
       button {
-        width: 190px;
-        height: 190px;
-        font-size: 3rem;
+        width: 90vw;
+        height: 60px;
+        font-size: 1.4rem;
       }
 
       #message {
         font-size: 1rem;
         padding: 0 10px;
-      }
-
-       #puzzle {
-        width: 1700px;
-        height: 1700px;
+        margin-bottom: 10px;
       }
     }
   </style>
@@ -120,7 +125,7 @@
   <script>
     const puzzle = document.getElementById('puzzle');
     const message = document.getElementById('message');
-    const totalPieces = 16; // 4x4
+    const totalPieces = 16;
     const positions = [];
     let firstPiece = null;
 
