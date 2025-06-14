@@ -341,28 +341,21 @@ p.dedicatoria{
 }
 
 /* MEDIA QUERIES (mantenha os que você já tem) */
+/* ========== CELULAR (Vertical) - MANTIDO COMO ESTÁ ========== */
 @media (max-width: 480px) {
 
-   body {
-        overflow-x: hidden;
-    }
+  body {
+    overflow-x: hidden;
+  }
 
   .card {
     height: 150px !important;
   }
+
   .card .back {
     font-size: 18px;
     padding: 10px;
   }
-}
-
-/* ========== CELULAR (Vertical) ========== */
-@media (max-width: 480px) {
-
-    body {
-        overflow-x: hidden;
-    }
-
 
   .game-container {
     grid-template-columns: repeat(2, 1fr);
@@ -390,10 +383,9 @@ p.dedicatoria{
     min-height: 2.9em;
   }
 
-  p.dedicatoria{
-     margin-left: 15px; 
-    
-}
+  p.dedicatoria {
+    margin-left: 15px;
+  }
 
   p#special-message {
     text-align: center;
@@ -413,7 +405,7 @@ p.dedicatoria{
     width: 40px !important;
     height: 40px !important;
   }
-  
+
   #btnPause {
     width: 40px !important;
     height: 40px !important;
@@ -423,49 +415,85 @@ p.dedicatoria{
 /* ========== CELULAR (Horizontal) e TABLETS PEQUENOS ========== */
 @media (min-width: 481px) and (max-width: 768px) {
 
-  body {
-        overflow-x: hidden;
-    }
-  
-
   .game-container {
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
+    padding: 10px;
+    width: 90%;
+    margin: 0 auto;
   }
 
   .card {
     height: 180px;
+    width: 100%;
+    margin: 0 auto;
   }
 
   h2 {
-    font-size: 2.2rem !important;
+    font-size: 2.2rem;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
   }
 
   p#special-message {
     font-size: 1.6rem;
+    text-align: center;
+    padding: 0 15px;
   }
-  
+
   #btnPlay, #btnPause {
-    width: 45px !important;
-    height: 45px !important;
+    width: 45px;
+    height: 45px;
   }
-  
+
   .btn {
-    width: 60% !important;
+    width: 60%;
+    margin: 15px auto;
   }
 }
 
 /* ========== TABLETS ========== */
 @media (min-width: 769px) and (max-width: 1024px) {
 
-  body {
-        overflow-x: hidden;
-    }
-
   .game-container {
     grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 10px;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .card {
+    height: 200px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .btn {
+    width: 50%;
+    margin: 15px auto;
+  }
+
+  #btnPlay, #btnPause {
+    width: 50px;
+    height: 50px;
+  }
+
+  p#special-message {
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 0 15px;
   }
 }
+
 
 /* * {
   outline: 1px solid red;
