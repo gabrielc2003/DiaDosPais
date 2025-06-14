@@ -342,6 +342,11 @@ p.dedicatoria{
 
 /* MEDIA QUERIES (mantenha os que você já tem) */
 @media (max-width: 480px) {
+
+   body {
+        overflow-x: hidden;
+    }
+
   .card {
     height: 150px !important;
   }
@@ -412,6 +417,11 @@ p.dedicatoria{
 
 /* ========== CELULAR (Horizontal) e TABLETS PEQUENOS ========== */
 @media (min-width: 481px) and (max-width: 768px) {
+
+   body {
+        overflow-x: hidden;
+    }
+    
   .game-container {
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
