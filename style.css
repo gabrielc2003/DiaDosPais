@@ -340,6 +340,37 @@ p.dedicatoria{
   text-align: center;
 }
 
+   .swal2-popup {
+      color:#CFE5F0;
+      font-family: var(--fonte-principal);
+    /* Altera a cor do fundo */
+
+  }
+    .swal2-popup {
+      background-color: #0F1128; /* rosa claro, por exemplo */
+    }
+
+    /* (Opcional) Altera a cor do botão */
+    .swal2-confirm {
+      background-color: #0c62e2; /* rosa vibrante */
+    }
+
+    .swal2-confirm:hover {
+      background-color: #0c62e2; /* rosa vibrante */
+    }
+
+    .swal2-title {
+      all: unset; /* reseta tudo */
+      display: block;
+      font-size: 1.875em; /* ou ajuste como quiser */
+      font-weight: 600;
+      text-align: center;
+      color: inherit;
+      margin: 10px 0 0.4em;
+    }
+
+
+
 /* MEDIA QUERIES (mantenha os que você já tem) */
 /* ========== CELULAR (Vertical) - MANTIDO COMO ESTÁ ========== */
 @media (max-width: 480px) {
