@@ -377,6 +377,7 @@ p.dedicatoria{
 
   body {
     overflow-x: hidden;
+    overflow-y: hidden;
   }
 
   .card {
