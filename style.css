@@ -354,13 +354,12 @@ p.dedicatoria{
 /* ========== CELULAR (Vertical) - MANTIDO COMO ESTÁ ========== */
 @media (max-width: 480px) {
 
-  body {
-    overflow-x: hidden;
-    
-    
-    
-  
-  }
+  html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
 
   .card {
     height: 150px !important;
@@ -375,14 +374,13 @@ p.dedicatoria{
   box-sizing: border-box;
 }
 
-/* Container principal */
 .container {
   display: flex;
   flex-direction: column;
   padding: 10px;
   width: 90%;
   height: auto;
-  min-height: 100vh; /* 20% da altura da tela */
+  min-height: 100dvh; /* 20% da altura da tela */
   box-sizing: border-box;
 }
 
@@ -390,7 +388,7 @@ p.dedicatoria{
   display: grid;
   grid-template-columns: repeat(2, 200px);
   width: 100%;
-  height: 67vh; /* 30% da altura da tela */
+   height: auto;
   margin: 0;
   box-sizing: border-box;
 }
@@ -538,6 +536,6 @@ p.dedicatoria{
 }
 
 
-/* * {
+* {
   outline: 1px solid red;
-} */
+}
