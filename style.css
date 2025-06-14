@@ -269,7 +269,7 @@ p.dedicatoria{
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 colunas no desktop */
   gap: 20px;
-  width: 100%;
+  width: 500px;
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
@@ -369,7 +369,7 @@ p.dedicatoria{
     gap: 10px;
     padding: 10px;
     width: 100%;
-    margin: 0 auto;
+    margin-right: 140px;
   }
 
   .card {
@@ -418,10 +418,11 @@ p.dedicatoria{
 /* ========== CELULAR (Horizontal) e TABLETS PEQUENOS ========== */
 @media (min-width: 481px) and (max-width: 768px) {
 
-   body {
+  body {
         overflow-x: hidden;
     }
-    
+  
+
   .game-container {
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
@@ -451,7 +452,16 @@ p.dedicatoria{
 
 /* ========== TABLETS ========== */
 @media (min-width: 769px) and (max-width: 1024px) {
+
+  body {
+        overflow-x: hidden;
+    }
+
   .game-container {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+/* * {
+  outline: 1px solid red;
+} */
