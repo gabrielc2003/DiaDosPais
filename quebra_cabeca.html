@@ -2,50 +2,70 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Quebra-Cabeça com Imagem</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <title>Quebra-Cabeça</title>
   <style>
     * {
       box-sizing: border-box;
     }
 
-    body {
-      font-family: sans-serif;
+    html, body {
       margin: 0;
-      padding: 20px;
-      background: #f5f5f5;
+      padding: 0;
+      height: 100%;
+      background: #0F1128;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: start;
-      min-height: 100vh;
+      justify-content: center;
+      width: 100%;
+      max-width: 500px;
     }
 
     h1 {
-      margin-bottom: 10px;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
       text-align: center;
     }
 
     #puzzle {
-        margin-top: 100px;
-      width: 90vw;
-      height: 90vw;
-      max-width: 400px;
-      max-height: 400px;
+      width: 100%;
+      height: 0;
+      padding-bottom: 100%;
       display: flex;
       flex-wrap: wrap;
       border: 3px solid #333;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       position: relative;
+    }
+
+    #puzzle.grayscale .piece {
+      filter: grayscale(100%);
+      transition: filter 0.5s ease;
     }
 
     .piece {
       width: 25%;
       height: 25%;
-      background-image: url('clo3.jpg'); /* Troque o nome se necessário */
+      background-image: url('clo3.jpg');
       background-size: 400% 400%;
       border: 1px solid #999;
       cursor: pointer;
       transition: border 0.2s;
+      position: absolute;
     }
 
     .piece.selected {
@@ -53,13 +73,16 @@
     }
 
     button {
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 12px 20px;
+      font-size: 1rem;
       background: #007bff;
       color: white;
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      width: 100%;
+      max-width: 300px;
+      margin-top: 10px;
     }
 
     button:hover {
@@ -67,46 +90,87 @@
     }
 
     #message {
-      margin-top: 10px;
+      margin-top: 15px;
       font-weight: bold;
-      color: green;
+      color: #00ff00;
       text-align: center;
+      font-size: 0.9rem;
+      padding: 0 10px;
+      min-height: 20px;
+    }
+
+    @media (max-width: 350px) {
+      h1 {
+        font-size: 1.3rem;
+      }
+
+      button {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>🧩 Quebra-Cabeça com Imagem</h1>
-  <div id="puzzle"></div>
-  <button onclick="shuffle()">🔄 Reiniciar</button>
-  <div id="message"></div>
+  <div class="container">
+    <h1>Encontre as peças e monte a nossa foto!</h1>
+    <div id="puzzle" class="grayscale"></div>
+    <button onclick="shuffle()">Embaralhar</button>
+    <div id="message"></div>
+  </div>
 
   <script>
     const puzzle = document.getElementById('puzzle');
     const message = document.getElementById('message');
-    const totalPieces = 16; // 4x4
+    const totalPieces = 16;
     const positions = [];
     let firstPiece = null;
 
     function createPuzzle() {
+      
+      puzzle.innerHTML = '';
+      positions.length = 0;
+
+      const puzzleWidth = puzzle.offsetWidth;
+      const pieceSize = puzzleWidth / 4;
+
+      puzzle.classList.add('grayscale');
+
       for (let i = 0; i < totalPieces; i++) {
         const piece = document.createElement('div');
         piece.classList.add('piece');
         const row = Math.floor(i / 4);
         const col = i % 4;
+
+        piece.style.width = `${pieceSize}px`;
+        piece.style.height = `${pieceSize}px`;
+        piece.style.left = `${col * pieceSize}px`;
+        piece.style.top = `${row * pieceSize}px`;
+
         piece.style.backgroundPosition = `${-col * 100}% ${-row * 100}%`;
         piece.dataset.index = i;
+        piece.dataset.order = i;
         puzzle.appendChild(piece);
         positions.push(i);
       }
+      shuffle();
     }
 
     function shuffle() {
       const pieces = Array.from(puzzle.children);
       const shuffled = [...positions].sort(() => Math.random() - 0.5);
+
+      const puzzleWidth = puzzle.offsetWidth;
+      const pieceSize = puzzleWidth / 4;
+
       shuffled.forEach((newPos, i) => {
-        pieces[i].style.order = newPos;
+        const row = Math.floor(newPos / 4);
+        const col = newPos % 4;
+        pieces[i].style.left = `${col * pieceSize}px`;
+        pieces[i].style.top = `${row * pieceSize}px`;
         pieces[i].dataset.order = newPos;
       });
+
       firstPiece = null;
       message.textContent = '';
     }
@@ -115,9 +179,24 @@
       const pieces = Array.from(puzzle.children);
       const win = pieces.every(piece => piece.dataset.index === piece.dataset.order);
       if (win) {
-        message.textContent = '✅ Parabéns! Você completou o quebra-cabeça!';
+        puzzle.classList.remove('grayscale');
+        setTimeout(() => {
+          Swal.fire({
+            title: "Parabéns!",
+            text: "Você completou o quebra-cabeças!",
+            icon: "success",
+            confirmButtonText: "Jogar novamente",
+            background: "#0F1128",
+            color: "white"
+          }).then(() => {
+            createPuzzle();
+            shuffle();
+          });
+        }, 2000); // 3 segundos de espera antes de mostrar o alerta
       }
+      
     }
+
 
     puzzle.addEventListener('click', (e) => {
       const target = e.target;
@@ -127,13 +206,17 @@
         firstPiece = target;
         firstPiece.classList.add('selected');
       } else {
-        const tempOrder = firstPiece.style.order;
-        firstPiece.style.order = target.style.order;
-        target.style.order = tempOrder;
+        const tempLeft = firstPiece.style.left;
+        const tempTop = firstPiece.style.top;
+        const tempOrder = firstPiece.dataset.order;
 
-        const tempData = firstPiece.dataset.order;
+        firstPiece.style.left = target.style.left;
+        firstPiece.style.top = target.style.top;
         firstPiece.dataset.order = target.dataset.order;
-        target.dataset.order = tempData;
+
+        target.style.left = tempLeft;
+        target.style.top = tempTop;
+        target.dataset.order = tempOrder;
 
         firstPiece.classList.remove('selected');
         firstPiece = null;
@@ -142,8 +225,8 @@
       }
     });
 
-    createPuzzle();
-    shuffle();
+    window.addEventListener('load', createPuzzle);
+    window.addEventListener('resize', createPuzzle);
   </script>
 </body>
 </html>

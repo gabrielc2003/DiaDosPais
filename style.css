@@ -214,7 +214,7 @@ p.dedicatoria{
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 colunas no desktop */
   gap: 20px;
-  width: 100%;
+  width: 500px;
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
@@ -285,31 +285,78 @@ p.dedicatoria{
   text-align: center;
 }
 
+  .swal2-toast {
+    width: 100px !important;
+    padding: 5px !important;
+    font-size: 14px !important;
+    font-family: var(--fonte-paragrafo);
+   
+ }
+
+
+
 /* MEDIA QUERIES (mantenha os que você já tem) */
+/* ========== CELULAR (Vertical) - MANTIDO COMO ESTÁ ========== */
 @media (max-width: 480px) {
+
+  html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
   .card {
     height: 150px !important;
   }
+
   .card .back {
     font-size: 18px;
     padding: 10px;
   }
+
+ * {
+  box-sizing: border-box;
 }
 
-/* ========== CELULAR (Vertical) ========== */
-@media (max-width: 480px) {
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 90%;
+  height: auto;
+  min-height: 100dvh; /* 20% da altura da tela */
+  box-sizing: border-box;
+}
 
-    body {
-        overflow-x: hidden;
-    }
+.game-container {
+  display: grid;
+  grid-template-columns: repeat(2, 200px);
+  width: 100%;
+   height: auto;
+  margin: 0;
+  box-sizing: border-box;
+}
 
-
-  .game-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    padding: 10px;
+  /* REMOVA as regras .buttons-container existentes e substitua por: */
+  .buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 5px 0 3px 0; /* margem superior reduzida e inferior aumentada */
     width: 100%;
-    margin: 0 auto;
+    position: static; /* remove posicionamento absoluto */
+    left: auto;
+    bottom: auto;
+    transform: none;
+    z-index: auto;
+  }
+
+  #btnPlay, #btnPause {
+    width: 45px !important; /* um pouco maiores em mobile */
+    height: 45px !important;
+    margin: 0 !important; /* remove margens individuais */
   }
 
   .card {
@@ -318,16 +365,21 @@ p.dedicatoria{
     margin: 0 auto;
   }
 
-  h2 {
-    font-size: 2rem !important;
-    text-align: center;
-    margin-left: 0 !important;
-    width: 100% !important;
-    display: block;
-    padding: 0 15px;
-    white-space: normal;
-    word-wrap: break-word;
-    min-height: 2.9em;
+ h2 {
+  font-size: 2rem !important;
+  text-align: center;
+  width: 90% !important;
+  margin: -10px auto 0 auto; /* sobe e centraliza */
+  display: block;
+  padding: 0 15px;
+  white-space: normal;
+  word-wrap: break-word;
+  min-height: 2.5em;
+}
+
+  p.dedicatoria {
+    margin-left: 5px;
+    margin-bottom: 0px;
   }
 
   p#special-message {
@@ -335,58 +387,101 @@ p.dedicatoria{
     margin-left: 0 !important;
     padding: 0 15px;
     font-size: 1.4rem;
+    margin-top: 3px;
   }
 
-  .btn, #btnPlay, #btnPause {
-    margin: 15px auto !important;
+  .btn {
+    margin:15px auto !important;
+    margin-top: 1px !important;
     width: 80%;
   }
 
-  #btnPlay {
-    margin-left: 15px !important;
-    margin-right: auto !important;
-    width: 40px !important;
-    height: 40px !important;
-  }
-  
-  #btnPause {
-    width: 40px !important;
-    height: 40px !important;
-  }
+
 }
 
 /* ========== CELULAR (Horizontal) e TABLETS PEQUENOS ========== */
 @media (min-width: 481px) and (max-width: 768px) {
+
   .game-container {
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
+    padding: 10px;
+    width: 90%;
+    margin: 0 auto;
   }
 
   .card {
     height: 180px;
+    width: 100%;
+    margin: 0 auto;
   }
 
   h2 {
-    font-size: 2.2rem !important;
+    font-size: 2.2rem;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
   }
 
   p#special-message {
     font-size: 1.6rem;
+    text-align: center;
+    padding: 0 15px;
   }
-  
+
   #btnPlay, #btnPause {
-    width: 45px !important;
-    height: 45px !important;
+    width: 45px;
+    height: 45px;
   }
-  
+
   .btn {
-    width: 60% !important;
+    width: 60%;
+    margin: 15px auto;
   }
 }
 
 /* ========== TABLETS ========== */
 @media (min-width: 769px) and (max-width: 1024px) {
+
   .game-container {
     grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 10px;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .card {
+    height: 200px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .btn {
+    width: 50%;
+    margin: 15px auto;
+  }
+
+  #btnPlay, #btnPause {
+    width: 50px;
+    height: 50px;
+  }
+
+  p#special-message {
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 0 15px;
   }
 }
+
+
+/* * {
+  outline: 1px solid red;
+} */

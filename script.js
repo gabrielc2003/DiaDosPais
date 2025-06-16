@@ -15,13 +15,32 @@ function iniciarTela1() {
 
   // ========== FUNÇÕES AUXILIARES ==========
 
+ // Função para exibir o alerta após 10 segundos
+  function exibirAlertaInicial() {
+    setTimeout(() => {
+        Swal.fire({
+            toast: true,
+            position: "top-end",
+            text: "Clique nas fotos!",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            background: "#0c62e2",
+            color:"#CFE5F0",
+            width: 190,
+        });
+    }, 3000); // 3 segundos = 3000 milissegundos
+}
+
+// Chamar a função quando a página carregar
+window.onload = exibirAlertaInicial;
   // Criação de corações
   function createHearts() {
     for (let i = 0; i < 20; i++) {
       const heart = document.createElement('div');
       heart.classList.add('heart');
       heart.style.left = `${Math.random() * 100}vw`;
-      heart.style.animationDuration = `${Math.random() * 3 + 3}s`;
+      heart.style.animationDuration = `${Math.random() * 10 + 2}s`;
       heart.style.opacity = Math.random();
       heartsContainer.appendChild(heart);
     }
@@ -83,7 +102,7 @@ function iniciarTela1() {
   // Dados das cartas
   const images = ["clo1.jpg", "clo2.jpg", "clo3.jpg", "clo4.jpg"]; // Corrigido "cio3.jpg" para "clo3.jpg"
   const frases = [
-    "Te amo pai ❤️",
+    "Te amo pai",
     "Obrigada por tudo!",
     "Você é o melhor!",
     "Feliz Dia Dos Pais"
@@ -173,11 +192,24 @@ function iniciarTela1() {
   // Inicia o jogo de cartas
   iniciarJogoCartas();
 
-  // Configura controles de áudio
-  const som = new Howl({ src: ['musica.mp3'] });
-  btnPlay.addEventListener('click', () => som.play());
-  btnPause.addEventListener('click', () => som.pause());
-}
+  const som = new Howl({ 
+      src: ['musica.mp3'],
+      html5: true, // Usa o Audio HTML5 para melhor performance
+      preload: true // Carrega o áudio antecipadamente
+  });
+
+  btnPlay.addEventListener('click', () => {
+      if (!som.playing()) { // Só toca se não estiver tocando
+          som.play();
+      }
+  });
+
+  btnPause.addEventListener('click', () => {
+      if (som.playing()) { // Só pausa se estiver tocando
+          som.pause();
+      }
+  });
+  }
 
 // Inicia a tela quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', iniciarTela1);
