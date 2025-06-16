@@ -23,11 +23,14 @@ function iniciarTela1() {
             position: "top-end",
             text: "Clique nas fotos!",
             showConfirmButton: false,
-            timer: 3000,
+            timer: 5000,
             timerProgressBar: true,
-            background: "#0c62e2",
-            color:"#CFE5F0",
+            background: "#E0D609",
+            color:"#000000",
             width: 190,
+            customClass: {
+              popup: 'meu-alerta'
+  }
         });
     }, 3000); // 3 segundos = 3000 milissegundos
 }
@@ -213,125 +216,6 @@ window.onload = exibirAlertaInicial;
 
 // Inicia a tela quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', iniciarTela1);
-
-
-// ================= TELA 2 =================
-function iniciarTela2() {
-  const letras = document.querySelectorAll('.letter');
-  const listaPalavras = document.querySelector('.words-to-find');
-
-  if (!letras.length || !listaPalavras) return;
-
-  const palavras = ['BANANA', 'UVA', 'MAÇÃ', 'KIWI'];
-  const encontradas = [];
-  let selecionadas = [];
-  let interagindo = false;
-
-  function adicionarLetra(letra) {
-    if (letra && letra.classList.contains('letter') && !letra.classList.contains('selecionada')) {
-      letra.classList.add('selecionada');
-      selecionadas.push(letra);
-    }
-  }
-
-  function limparSelecao() {
-    selecionadas.forEach(l => l.classList.remove('selecionada'));
-    selecionadas = [];
-  }
-
-  function verificarPalavra() {
-    const texto = selecionadas.map(l => l.textContent).join('');
-
-    palavras.forEach(palavra => {
-      if (texto === palavra && !encontradas.includes(palavra)) {
-        encontradas.push(palavra);
-        selecionadas.forEach(l => l.classList.add('encontrada'));
-        atualizarLista(palavra);
-        verificarFimDoJogo(); // 👈 chama aqui
-      }
-    });
-
-    limparSelecao();
-  }
-
-  function verificarFimDoJogo() {
-    if (encontradas.length === palavras.length) {
-      Swal.fire({
-        title: "Parabéns, amor! 🎉",
-        text: "Você encontrou todas as palavras!",
-        icon: "success",
-        confirmButtonText: "Avançar"
-      }).then(() => {
-        window.location.href = "final.html"; // ajuste conforme quiser
-      });
-    }
-  }
-
-  function atualizarLista(palavra) {
-    const itens = document.querySelectorAll('.words-to-find li');
-    itens.forEach(item => {
-      if (item.textContent === palavra) {
-        item.style.textDecoration = 'line-through';
-        item.style.color = 'green';
-      }
-    });
-  }
-
-  // Eventos de mouse
-  document.addEventListener('mousedown', (e) => {
-    interagindo = true;
-    limparSelecao();
-    const el = e.target;
-    adicionarLetra(el);
-  });
-
-  document.addEventListener('mousemove', (e) => {
-    if (!interagindo) return;
-    const el = document.elementFromPoint(e.clientX, e.clientY);
-    adicionarLetra(el);
-  });
-
-  document.addEventListener('mouseup', () => {
-    interagindo = false;
-    verificarPalavra();
-  });
-
-  // Eventos de touch
-  document.addEventListener('touchstart', (e) => {
-    interagindo = true;
-    limparSelecao();
-    const touch = e.touches[0];
-    const el = document.elementFromPoint(touch.clientX, touch.clientY);
-    adicionarLetra(el);
-  });
-
-  document.addEventListener('touchmove', (e) => {
-    if (!interagindo) return;
-    const touch = e.touches[0];
-    const el = document.elementFromPoint(touch.clientX, touch.clientY);
-    adicionarLetra(el);
-  });
-
-  document.addEventListener('touchend', () => {
-    interagindo = false;
-    verificarPalavra();
-  });
-
-  function embaralharLetras() {
-    const container = document.querySelector('.letras');
-    const letras = Array.from(container.children);
-
-    for (let i = letras.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [letras[i], letras[j]] = [letras[j], letras[i]];
-    }
-
-    letras.forEach(letra => container.appendChild(letra));
-  }
-
-  embaralharLetras(); // 👈 chama ao iniciar
-}
-
 
 
 // ================= INICIALIZAÇÃO =================
