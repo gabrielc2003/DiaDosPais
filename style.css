@@ -351,6 +351,7 @@ p.dedicatoria{
     bottom: auto;
     transform: none;
     z-index: auto;
+     margin: 5px 0 3px 0; /* margem superior reduzida e inferior aumentada */
   }
 
   #btnPlay, #btnPause {
