@@ -305,5 +305,4 @@ function iniciarTela2() {
 // ================= INICIALIZAÇÃO =================
 document.addEventListener('DOMContentLoaded', () => {
   iniciarTela1();
-  iniciarTela2();
 });

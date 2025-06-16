@@ -209,61 +209,6 @@ p.dedicatoria{
     }
 }
 
-/* jogo.html */
-
-.word-grid {
-  display: grid;
-  grid-template-columns: repeat(9, 50px);
-  gap: 5px;
-  justify-content: center;
-  margin-bottom: 30px;
-}
-
-.letter {
-  background-color: #121212;
-  border: 1px solid #aaa;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
-  font-size: 24px;
-  font-weight: bold;
-  cursor: default;
-  transition: background-color 0.2s;
-}
-
-.letter:hover {
-  background-color: #d148bf;
-}
-
-.words-to-find {
-  width:500px;
-  background: #121212;
-  display: inline-block;
-  padding: 15px 25px;
-  border-radius: 8px;
-  box-shadow: 0 0 5px #aaa;
-}
-
-.words-to-find ul {
-  list-style: none;
-  padding: 0;
-}
-
-.words-to-find li {
-  font-size: 18px;
-  margin: 5px 0;
-}
-
-.selecionada {
-  background-color: #ffe066;
-}
-
-.encontrada {
-  background-color: #8ce99a !important;
-  color: white;
-}
-
-
 /* ========== ESTRUTURA BASE ========== */
 .game-container {
   display: grid;

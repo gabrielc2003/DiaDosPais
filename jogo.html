@@ -2,101 +2,344 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Caça-Palavras</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caça-Palavras: Suas Qualidades</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #0F1128;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 1000px;
+      gap: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      margin-bottom: 10px;
+      color: #0c62e2;
+    }
+
+    h2.subtitle {
+      text-align: center;
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
+      color: #3cc5e7;
+      margin-bottom: 15px;
+    }
+
+    .word-grid-container {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      display: flex;
+      justify-content: center;
+    }
+
+    .word-grid {
+      display: grid;
+      grid-template-columns: repeat(15, minmax(25px, 1fr));
+      gap: 3px;
+      padding: 5px;
+      min-width: 300px;
+    }
+
+    .letter {
+      background-color: #121212;
+      border: 1px solid #aaa;
+      aspect-ratio: 1;
+      font-size: clamp(16px, 5vw, 24px);
+      font-weight: bold;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.2s;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .letter:hover {
+      background-color: #3cc5e7;
+    }
+
+    .words-to-find {
+      background: #121212;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px #aaa;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .words-to-find h2 {
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: clamp(1.1rem, 4vw, 1.3rem);
+      color: #0c62e2;
+    }
+
+    .words-to-find ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 15px;
+    }
+
+    .words-to-find li {
+      font-size: clamp(16px, 4vw, 18px);
+    }
+
+    .selecionada {
+      background-color: #3cc5e7;
+      color: #1a1a1a;
+    }
+
+    .encontrada {
+      background-color: #0c62e2 !important;
+      color: #1a1a1a;
+      font-weight: bold;
+    }
+
+    /* Melhorias para telas muito pequenas */
+    @media (max-width: 400px) {
+      .word-grid {
+        grid-template-columns: repeat(15, minmax(20px, 1fr));
+        gap: 2px;
+      }
+      
+      .words-to-find {
+        padding: 12px;
+      }
+      
+      .words-to-find ul {
+        gap: 5px 10px;
+      }
+    }
+
+    /* Desativar hover em dispositivos touch */
+    @media (hover: none) {
+      .letter:hover {
+        background-color: #121212;
+      }
+    }
+
+    /* Ajuste para telas altas */
+    @media (min-height: 700px) {
+      .main-container {
+        gap: 30px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Caça-Palavras: Frutas</h1>
+  <div class="main-container">
+    <h1>Caça-Palavras: Suas Qualidades</h1>
+    <h2 class="subtitle">Encontre suas maiores qualidades como pai</h2>
 
-    <div class="word-grid">
-      <div class="letter">B</div>
-      <div class="letter">A</div>
-      <div class="letter">N</div>
-      <div class="letter">A</div>
-      <div class="letter">N</div>
-      <div class="letter">A</div>
-
-      <div class="letter">Z</div>
-      <div class="letter">Z</div>
-      <div class="letter">U</div>
-      <div class="letter">K</div>
-      <div class="letter">I</div>
-      <div class="letter">W</div>
-      <div class="letter">I</div>
-      <div class="letter">X</div>
-
-      <div class="letter">I</div>
-      <div class="letter">X</div>
-      <div class="letter">Z</div>
-      <div class="letter">O</div>
-      <div class="letter">M</div>
-      <div class="letter">A</div>
-      <div class="letter">Ç</div>
-      <div class="letter">Ã</div>
-      
-      <div class="letter">L</div>
-      <div class="letter">Ç</div>
-      <div class="letter">Ã</div>
-      <div class="letter">U</div>
-      <div class="letter">U</div>
-      <div class="letter">V</div>
-
-      <div class="letter">H</div>
-      <div class="letter">U</div>
-      <div class="letter">D</div>
-      <div class="letter">U</div>
-      <div class="letter">V</div>
-      <div class="letter">A</div>
-      <div class="letter">Y</div>
-      <div class="letter">Z</div>
-
-      <div class="letter">H</div>
-      <div class="letter">U</div>
-      <div class="letter">D</div>
-      <div class="letter">U</div>
-      <div class="letter">A</div>
-      <div class="letter">Y</div>
-      <div class="letter">Z</div>
-
-      <div class="letter">H</div>
-      <div class="letter">U</div>
-      <div class="letter">D</div>
-      <div class="letter">U</div>
-      <div class="letter">A</div>
-      <div class="letter">Y</div>
-      <div class="letter">Z</div>
-
-      <div class="letter">U</div>
-      <div class="letter">A</div>
-      <div class="letter">Y</div>
-      <div class="letter">Z</div>
-      <div class="letter">L</div>
-      <div class="letter">A</div>
-      <div class="letter">R</div>
-      <div class="letter">A</div>
-      <div class="letter">N</div>
-      <div class="letter">J</div>
-      <div class="letter">A</div>
-
-      <div class="letter">A</div>
-      <div class="letter">Y</div>
-      
+    <div class="word-grid-container">
+      <div class="word-grid" id="wordGrid">
+        <!-- As letras serão inseridas aqui via JavaScript -->
+      </div>
     </div>
 
     <div class="words-to-find">
       <h2>Encontre as palavras:</h2>
       <ul>
-        <li>UVA</li>
-        <li>MAÇÃ</li>
-        <li>BANANA</li>
-        <li>KIWI</li>
-        <li>LARANJA</li>
+        <li>AMOROSO</li>
+        <li>CARINHOSO</li>
+        <li>AMIGO</li>
+        <li>RESPONSAVEL</li>
+        <li>CONSELHEIRO</li>
       </ul>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Matriz de letras para o caça-palavras com as novas palavras
+      const letterMatrix = [
+        ['A', 'M', 'O', 'R', 'O', 'S', 'O', 'X', 'Y', 'Z', 'W', 'V', 'U', 'T', 'S'],
+        ['C', 'A', 'R', 'I', 'N', 'H', 'O', 'S', 'O', 'L', 'M', 'N', 'O', 'P', 'Q'],
+        ['A', 'M', 'I', 'G', 'O', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'],
+        ['R', 'E', 'S', 'P', 'O', 'N', 'S', 'A', 'V', 'E', 'L', 'Y', 'Z', 'A', 'B'],
+        ['C', 'O', 'N', 'S', 'E', 'L', 'H', 'E', 'I', 'R', 'O', 'K', 'L', 'M', 'N'],
+        ['O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'A', 'B', 'C'],
+        ['D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'],
+        ['S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
+        ['H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V'],
+        ['W', 'X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K']
+      ];
+
+      // Palavras para encontrar
+      const palavras = ['AMOROSO', 'CARINHOSO', 'AMIGO', 'RESPONSAVEL', 'CONSELHEIRO'];
+      let encontradas = [];
+      let selecionadas = [];
+      let interagindo = false;
+
+      // Criar o grid de letras
+      const wordGrid = document.getElementById('wordGrid');
+      wordGrid.innerHTML = '';
+      
+      letterMatrix.forEach(row => {
+        row.forEach(letter => {
+          const letterElement = document.createElement('div');
+          letterElement.className = 'letter';
+          letterElement.textContent = letter;
+          wordGrid.appendChild(letterElement);
+        });
+      });
+
+      const letras = document.querySelectorAll('.letter');
+
+      function adicionarLetra(letra) {
+        if (letra && letra.classList.contains('letter') && 
+            !letra.classList.contains('selecionada') && 
+            !letra.classList.contains('encontrada')) {
+          letra.classList.add('selecionada');
+          selecionadas.push(letra);
+        }
+      }
+
+      function limparSelecao() {
+        selecionadas.forEach(l => l.classList.remove('selecionada'));
+        selecionadas = [];
+      }
+
+      function verificarPalavra() {
+        const texto = selecionadas.map(l => l.textContent).join('');
+        
+        if (palavras.includes(texto)) {
+          if (!encontradas.includes(texto)) {
+            encontradas.push(texto);
+            selecionadas.forEach(l => l.classList.add('encontrada'));
+            atualizarLista(texto);
+            verificarFimDoJogo();
+            
+            // Mensagem especial para cada qualidade encontrada
+            const mensagens = {
+              'AMOROSO': 'Você é todo amor e dedicação! ❤️',
+              'CARINHOSO': 'Seu carinho aquece nossos corações! 🤗',
+              'AMIGO': 'Além de pai, você é nosso melhor amigo! 👬',
+              'RESPONSAVEL': 'Sua responsabilidade nos dá segurança! 🛡️',
+              'CONSELHEIRO': 'Seus conselhos são sempre valiosos! 💡'
+            };
+            
+            Swal.fire({
+              title: texto,
+              text: mensagens[texto],
+              icon: "success",
+              confirmButtonText: "Continuar"
+            });
+          }
+        }
+        
+        limparSelecao();
+      }
+
+      function verificarFimDoJogo() {
+        if (encontradas.length === palavras.length) {
+          Swal.fire({
+            title: "Parabéns! 🎉",
+            html: "<p>Você encontrou todas as suas qualidades!</p><p>Você é um pai incrível!</p>",
+            icon: "success",
+            confirmButtonText: "❤️ Obrigado! ❤️"
+          });
+        }
+      }
+
+      function atualizarLista(palavra) {
+        const itens = document.querySelectorAll('.words-to-find li');
+        itens.forEach(item => {
+          if (item.textContent === palavra) {
+            item.style.textDecoration = 'line-through';
+            item.style.color = '#8ce99a';
+            item.style.fontWeight = 'bold';
+          }
+        });
+      }
+
+      // Eventos de mouse
+      document.addEventListener('mousedown', (e) => {
+        if (e.target.classList.contains('letter')) {
+          interagindo = true;
+          limparSelecao();
+          adicionarLetra(e.target);
+        }
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (!interagindo) return;
+        if (e.target.classList.contains('letter')) {
+          adicionarLetra(e.target);
+        }
+      });
+
+      document.addEventListener('mouseup', () => {
+        if (interagindo) {
+          verificarPalavra();
+          interagindo = false;
+        }
+      });
+
+      // Eventos de touch
+      document.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        const el = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (el && el.classList.contains('letter')) {
+          interagindo = true;
+          limparSelecao();
+          adicionarLetra(el);
+          e.preventDefault();
+        }
+      });
+
+      document.addEventListener('touchmove', (e) => {
+        if (!interagindo) return;
+        const touch = e.touches[0];
+        const el = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (el && el.classList.contains('letter')) {
+          adicionarLetra(el);
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      document.addEventListener('touchend', () => {
+        if (interagindo) {
+          verificarPalavra();
+          interagindo = false;
+        }
+      });
+
+      // Prevenir rolagem ao interagir com o grid
+      wordGrid.addEventListener('touchstart', (e) => {
+        if (e.target.classList.contains('letter')) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+    });
+  </script>
 </body>
 </html>
