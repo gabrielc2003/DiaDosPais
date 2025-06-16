@@ -345,7 +345,6 @@ p.dedicatoria{
     display: flex;
     justify-content: center;
     gap: 5px;
-    margin: 5px 0 3px 0; /* margem superior reduzida e inferior aumentada */
     width: 100%;
     position: static; /* remove posicionamento absoluto */
     left: auto;
@@ -369,7 +368,7 @@ p.dedicatoria{
   h2 {
     font-size: 2rem !important;
     text-align: center;
-    margin: -5px auto 0 auto;
+    margin: -50px auto 0 auto; /* sobe e centraliza */
     width: 90% !important;
     display: block;
     padding: 0 15px;
