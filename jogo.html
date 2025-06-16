@@ -126,30 +126,44 @@
       font-weight: bold;
     }
 
-
 @media (max-width: 400px) {
-  .word-grid {
-    grid-template-columns: repeat(15, minmax(20px, 1fr));
-    gap: 2px;
+    body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+
+    .main-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* Centraliza verticalmente */
+      align-items: center;     /* Centraliza horizontalmente */
+      padding: 20px;
+      padding-top: 0;
+      gap: 0px;
+    }
+
+    .word-grid {
+      grid-template-columns: repeat(15, minmax(20px, 1fr));
+      gap: 2px;
+    }
+
+    .words-to-find {
+      padding: 12px;
+    }
+
+    .words-to-find ul {
+      gap: 5px 10px;
+    }
+
+    h1 {
+      margin-top: 5px;
+    }
   }
 
-  .words-to-find {
-    padding: 12px;
-  }
-
-  .words-to-find ul {
-    gap: 5px 10px;
-  }
-
-  h1 {
-    margin-top: 5px;
-  }
-
-  body {
-    overflow-x: hidden;
-    overflow-y: hidden;
-  }
-}
 
  @media (hover: none) {
   .letter:hover {
@@ -167,25 +181,34 @@
 }
 
 
-@media (min-height: 700px) {
-  .main-container {
-    gap: 15px;
-  }
+ @media (min-height: 700px) {
 
-  h1 {
-    margin-top: 5px;
-    margin-bottom: 0px;
-  }
+      body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
-  body {
-    overflow-x: hidden;
-    overflow-y: hidden;
-  }
+    .main-container {
+      gap: 0px;
+      min-height: 100vh; /* Altura mínima = 100% da tela */
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* Centraliza verticalmente */
+      align-items: center;     /* Centraliza horizontalmente */
+      padding: 20px;
+      padding-top: 0;
+    }
 
-  .word-grid {
-    gap: 0px;
+    body {
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+
+    .word-grid {
+      gap: 0px;
+    }
   }
-}
 
 
     .frase-final {
@@ -316,9 +339,9 @@
               <span class="amigo">amigo</span> nos momentos certos, 
               <span class="responsavel">responsável</span> em todas as situações 
               e sábio <span class="conselheiro">conselheiro</span>, 
-              é o maior tesouro que uma família pode ter.
-            </p>
-          `,
+              é o maior tesouro que uma família pode ter. Te amo.
+            </p> `,
+
             icon: 'success',
             confirmButtonText: 'Jogar novamente',
             background: '#121212',
