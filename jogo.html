@@ -6,6 +6,7 @@
   <title>Caça-Palavras: Suas Qualidades</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Edu+NSW+ACT+Hand+Pre:wght@400..700&family=Edu+QLD+Hand:wght@400..700&family=Outfit:wght@100..900&display=swap');@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Edu+QLD+Hand:wght@400..700&family=Outfit:wght@100..900&display=swap');
     * {
       box-sizing: border-box;
       margin: 0;
@@ -36,6 +37,7 @@
     h1 {
       text-align: center;
       font-size: clamp(1.5rem, 5vw, 2rem);
+      font-family: 'Outfit';
       margin-bottom: 10px;
       color: #0c62e2;
     }
@@ -43,6 +45,7 @@
     h2.subtitle {
       text-align: center;
       font-size: clamp(1.2rem, 4vw, 1.5rem);
+      font-family: 'Outfit';
       color: #3cc5e7;
       margin-bottom: 15px;
     }
@@ -68,6 +71,7 @@
       border: 1px solid #aaa;
       aspect-ratio: 1;
       font-size: clamp(16px, 5vw, 24px);
+      font-family: 'Outfit';
       font-weight: bold;
       text-align: center;
       display: flex;
@@ -148,9 +152,35 @@
     /* Ajuste para telas altas */
     @media (min-height: 700px) {
       .main-container {
-        gap: 30px;
+        gap: 15px;
       }
+
+      h1{
+        margin-bottom: 0px;
+      }
+
     }
+
+    .frase-final {
+      text-align: center;
+      margin: 30px 0;
+      padding: 20px;
+      background: #121212;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .frase-final p {
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
+
+    .amoroso { color: #0c62e2; font-weight: bold; font-family: 'Outfit';}
+    .carinhoso { color: #66b3ff; font-weight: bold; font-family: 'Outfit'; }
+    .amigo { color: #3cc5e7; font-weight: bold; font-family: 'Outfit'; }
+    .responsavel { color: #0c62e2; font-weight: bold; font-family: 'Outfit'; }
+    .conselheiro { color: #3cc5e7; font-weight: bold; font-family: 'Outfit'; }
+
   </style>
 </head>
 <body>
@@ -236,38 +266,42 @@
             encontradas.push(texto);
             selecionadas.forEach(l => l.classList.add('encontrada'));
             atualizarLista(texto);
-            verificarFimDoJogo();
-            
-            // Mensagem especial para cada qualidade encontrada
-            const mensagens = {
-              'AMOROSO': 'Você é todo amor e dedicação! ❤️',
-              'CARINHOSO': 'Seu carinho aquece nossos corações! 🤗',
-              'AMIGO': 'Além de pai, você é nosso melhor amigo! 👬',
-              'RESPONSAVEL': 'Sua responsabilidade nos dá segurança! 🛡️',
-              'CONSELHEIRO': 'Seus conselhos são sempre valiosos! 💡'
-            };
-            
-            Swal.fire({
-              title: texto,
-              text: mensagens[texto],
-              icon: "success",
-              confirmButtonText: "Continuar"
-            });
+
+            // Verifica se todas as palavras foram encontradas
+            if (encontradas.length === palavras.length) {
+              setTimeout(() => {
+                mostrarMensagemFinal();
+              }, 500);
+            }
           }
         }
         
         limparSelecao();
       }
 
-      function verificarFimDoJogo() {
-        if (encontradas.length === palavras.length) {
-          Swal.fire({
-            title: "Parabéns! 🎉",
-            html: "<p>Você encontrou todas as suas qualidades!</p><p>Você é um pai incrível!</p>",
-            icon: "success",
-            confirmButtonText: "❤️ Obrigado! ❤️"
-          });
-        }
+      function mostrarMensagemFinal() {
+        Swal.fire({
+          title: 'Parabéns! 🎉',
+          html: `
+            <p style="font-size: 1.1rem; line-height: 1.6;">
+              Um pai <span class="amoroso">amoroso</span> e 
+              <span class="carinhoso">carinhoso</span>, que é 
+              <span class="amigo">amigo</span> nos momentos certos, 
+              <span class="responsavel">responsável</span> em todas as situações 
+              e sábio <span class="conselheiro">conselheiro</span>, 
+              é o maior tesouro que uma família pode ter.
+            </p>
+          `,
+            icon: 'success',
+            confirmButtonText: 'Jogar novamente',
+            background: '#121212',
+            color: 'white',
+            customClass: {
+            popup: 'caixa-final'
+          }
+        }).then(() => {
+          location.reload(); // recarrega a página para jogar de novo
+        });
       }
 
       function atualizarLista(palavra) {
@@ -275,7 +309,7 @@
         itens.forEach(item => {
           if (item.textContent === palavra) {
             item.style.textDecoration = 'line-through';
-            item.style.color = '#8ce99a';
+            item.style.color = '#0c62e2';
             item.style.fontWeight = 'bold';
           }
         });
