@@ -280,20 +280,17 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Matriz de letras para o caça-palavras com as novas palavras
-         const letterMatrix = [
-          ['C', 'A', 'L', 'M', 'O', 'P',], // CALMO (linha 0)
-          ['B', 'Ç', 'F', 'G', 'A', 'Q',], // A de AMIGO (coluna 4)
-          ['X', 'Y', 'J', 'K', 'M', 'S',], // M
-          ['D', 'O', 'C', 'E', 'I', 'P',], // DOCE (linha 3), I
-          ['N', 'L', 'Ç', 'V', 'G', 'B',], // G
-          ['Q', 'W', 'X', 'M', 'O', 'K',], // O
-          ['P', 'C', 'F', 'I', 'E', 'L',], // FIEL (linha 6)
-          ['S', 'X', 'Z', 'F', 'H', 'Ç',],  // L
-          ['U', 'R', 'F', 'P', 'A', 'I',],  // L
-        ];
-
-
-
+        const letterMatrix = [
+            ['C', 'A', 'L', 'M', 'O', 'P'], // <- 6 colunas
+            ['B', 'Ç', 'F', 'G', 'A', 'Q'],
+            ['X', 'Y', 'J', 'K', 'M', 'S'],
+            ['D', 'O', 'C', 'E', 'I', 'P'], // <- DOCE está aqui!
+            ['N', 'L', 'Ç', 'V', 'G', 'B'],
+            ['Q', 'W', 'X', 'M', 'O', 'K'],
+            ['P', 'C', 'F', 'I', 'E', 'L'], // <- FIEL está aqui
+            ['S', 'X', 'Z', 'F', 'H', 'Ç'],
+            ['U', 'R', 'F', 'P', 'A', 'I'],
+          ];
 
       // Palavras para encontrar
       const palavras = ['PAI', 'FIEL', 'AMIGO', 'DOCE', 'CALMO'];
