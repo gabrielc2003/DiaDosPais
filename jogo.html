@@ -126,7 +126,7 @@
       font-weight: bold;
     }
 
-@media (max-width: 400px) {
+@media (max-width: 600px) {
     body, html {
       height: 100%;
       margin: 0;
@@ -162,6 +162,28 @@
 
     h1 {
       margin-top: 5px;
+    }
+
+    .word-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr); /* 6 colunas */
+      gap: 4px;
+      margin-bottom: 15px;
+      max-width: 90vw;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .word-cell {
+      aspect-ratio: 1 / 1;
+      font-size: clamp(1rem, 4vw, 1.4rem);
+      font-weight: bold;
+      background-color: #111727;
+      color: #ffffff;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
@@ -204,28 +226,6 @@
     body {
       overflow-x: hidden;
       overflow-y: hidden;
-    }
-
-    .word-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr); /* 6 colunas */
-      gap: 4px;
-      margin-bottom: 15px;
-      max-width: 90vw;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .word-cell {
-      aspect-ratio: 1 / 1;
-      font-size: clamp(1rem, 4vw, 1.4rem);
-      font-weight: bold;
-      background-color: #111727;
-      color: #ffffff;
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
 
@@ -300,14 +300,17 @@
       const wordGrid = document.getElementById('wordGrid');
       wordGrid.innerHTML = '';
       
-      letterMatrix.forEach(row => {
-        row.forEach(letter => {
+      letterMatrix.forEach((row, i) => {
+        row.forEach((letter, j) => {
           const letterElement = document.createElement('div');
           letterElement.className = 'letter';
           letterElement.textContent = letter;
+          letterElement.dataset.linha = i;
+          letterElement.dataset.coluna = j;
           wordGrid.appendChild(letterElement);
         });
       });
+
 
       const letras = document.querySelectorAll('.letter');
 
