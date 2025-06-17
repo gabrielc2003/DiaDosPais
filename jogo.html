@@ -328,22 +328,77 @@
         selecionadas = [];
       }
 
-      function verificarPalavra() {
-        const texto = selecionadas.map(l => l.textContent).join('');
-        
-        if (palavras.includes(texto)) {
-          if (!encontradas.includes(texto)) {
-            encontradas.push(texto);
-            selecionadas.forEach(l => l.classList.add('encontrada'));
-            atualizarLista(texto);
+      function checkSelectedWord() {
+  // Ordena as células selecionadas por posição
+  selecionadas.sort((a, b) => a.row - b.row || a.col - b.col);
+  
+  // Verifica palavras contínuas (como antes)
+  const continuousWord = selecionadas.map(c => c.letter).join('');
+  if (palavras.includes(continuousWord)) {
+    markAsFound(continuousWord);
+    return;
+  }
 
-            // Verifica se todas as palavras foram encontradas
-            if (encontradas.length === palavras.length) {
-              setTimeout(() => {
-                mostrarMensagemFinal();
-              }, 500);
+  // Verifica palavras descontínuas (AMIGO)
+  const disconnectedWord = getDisconnectedWord();
+  if (disconnectedWord && palavras.includes(disconnectedWord)) {
+    markAsFound(disconnectedWord);
+  } else {
+    clearSelection();
+  }
+}
+
+      function getDisconnectedWord() {
+      // Lógica específica para AMIGO (A na linha 3, M implícito, I e G na linha 4)
+      if (selecionadas.length === 3 && 
+          selecionadas[0].letter === 'A' && 
+          selecionadas[1].letter === 'I' && 
+          selecionadas[2].letter === 'G' &&
+          selecionadas[0].col === 4 && 
+          selecionadas[1].col === 4 &&
+          selecionadas[2].col === 5) {
+        return 'AMIGO';
+      }
+      return null;
+    }
+
+      function verificarPalavra() {
+          // Verifica primeiro palavras contínuas (como CALMO, FIEL, DOCE)
+        const textoContinuo = selecionadas.map(l => l.textContent).join('');
+        
+        if (palavras.includes(textoContinuo)) {
+            if (!encontradas.includes(textoContinuo)) {
+                encontradas.push(textoContinuo);
+                selecionadas.forEach(l => l.classList.add('encontrada'));
+                atualizarLista(textoContinuo);
+                limparSelecao();
+                return;
             }
-          }
+        }
+        
+        // Verificação especial para AMIGO (A, I, G em posições específicas)
+        if (selecionadas.length === 3) {
+            const posicoes = selecionadas.map(el => ({
+                linha: parseInt(el.dataset.linha),
+                coluna: parseInt(el.dataset.coluna),
+                letra: el.textContent
+            }));
+            
+            // Ordena por linha e coluna
+            posicoes.sort((a, b) => a.linha - b.linha || a.coluna - b.coluna);
+            
+            if (posicoes[0].letra === 'A' && posicoes[0].linha === 3 && posicoes[0].coluna === 4 &&
+                posicoes[1].letra === 'I' && posicoes[1].linha === 4 && posicoes[1].coluna === 4 &&
+                posicoes[2].letra === 'G' && posicoes[2].linha === 4 && posicoes[2].coluna === 5) {
+                
+                if (!encontradas.includes('AMIGO')) {
+                    encontradas.push('AMIGO');
+                    selecionadas.forEach(l => l.classList.add('encontrada'));
+                    atualizarLista('AMIGO');
+                    limparSelecao();
+                    return;
+                }
+            }
         }
         
         limparSelecao();
