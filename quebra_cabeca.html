@@ -6,6 +6,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>Quebra-Cabeça</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Edu+NSW+ACT+Hand+Pre:wght@400..700&family=Edu+QLD+Hand:wght@400..700&family=Outfit:wght@100..900&display=swap');@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Edu+QLD+Hand:wght@400..700&family=Outfit:wght@100..900&display=swap');
     * {
       box-sizing: border-box;
     }
@@ -134,6 +135,12 @@
         transition: background-color 0.3s;
       }
 
+      .swal2-confirm-custom {
+        width: 120px;
+        font-family: 'Outfit';
+      }
+
+
     }
 
   </style>
@@ -219,7 +226,10 @@
             icon: "success",
             confirmButtonText: "Jogar novamente",
             background: "#0F1128",
-            color: "white"
+            color: "white",
+            customClass: {
+              confirmButton: 'swal2-confirm-custom'
+            }
           }).then(() => {
             createPuzzle();
             shuffle();
