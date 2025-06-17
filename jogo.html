@@ -316,8 +316,7 @@
 
       function adicionarLetra(letra) {
         if (letra && letra.classList.contains('letter') && 
-            !letra.classList.contains('selecionada') && 
-            !letra.classList.contains('encontrada')) {
+            !letra.classList.contains('selecionada')) {
           letra.classList.add('selecionada');
           selecionadas.push(letra);
         }
@@ -363,43 +362,54 @@
     }
 
       function verificarPalavra() {
-          // Verifica primeiro palavras contínuas (como CALMO, FIEL, DOCE)
-        const textoContinuo = selecionadas.map(l => l.textContent).join('');
-        
-        if (palavras.includes(textoContinuo)) {
+                const textoContinuo = selecionadas.map(l => l.textContent).join('');
+
+          if (palavras.includes(textoContinuo)) {
             if (!encontradas.includes(textoContinuo)) {
-                encontradas.push(textoContinuo);
-                selecionadas.forEach(l => l.classList.add('encontrada'));
-                atualizarLista(textoContinuo);
-                limparSelecao();
-                return;
+              encontradas.push(textoContinuo);
+              selecionadas.forEach(l => l.classList.add('encontrada'));
+              atualizarLista(textoContinuo);
+              limparSelecao();
+
+              // ✅ Verifica se todas foram encontradas
+              if (encontradas.length === palavras.length) {
+                mostrarMensagemFinal();
+              }
+
+              return;
             }
-        }
-        
-        // Verificação especial para AMIGO (A, I, G em posições específicas)
-        if (selecionadas.length === 3) {
+          }
+
+          // Verificação especial para AMIGO (A, I, G em posições específicas)
+          if (selecionadas.length === 3) {
             const posicoes = selecionadas.map(el => ({
-                linha: parseInt(el.dataset.linha),
-                coluna: parseInt(el.dataset.coluna),
-                letra: el.textContent
+              linha: parseInt(el.dataset.linha),
+              coluna: parseInt(el.dataset.coluna),
+              letra: el.textContent
             }));
-            
+
             // Ordena por linha e coluna
             posicoes.sort((a, b) => a.linha - b.linha || a.coluna - b.coluna);
-            
+
             if (posicoes[0].letra === 'A' && posicoes[0].linha === 3 && posicoes[0].coluna === 4 &&
                 posicoes[1].letra === 'I' && posicoes[1].linha === 4 && posicoes[1].coluna === 4 &&
                 posicoes[2].letra === 'G' && posicoes[2].linha === 4 && posicoes[2].coluna === 5) {
-                
-                if (!encontradas.includes('AMIGO')) {
-                    encontradas.push('AMIGO');
-                    selecionadas.forEach(l => l.classList.add('encontrada'));
-                    atualizarLista('AMIGO');
-                    limparSelecao();
-                    return;
+              
+              if (!encontradas.includes('AMIGO')) {
+                encontradas.push('AMIGO');
+                selecionadas.forEach(l => l.classList.add('encontrada'));
+                atualizarLista('AMIGO');
+                limparSelecao();
+
+                // ✅ Verifica se todas foram encontradas
+                if (encontradas.length === palavras.length) {
+                  mostrarMensagemFinal();
                 }
+
+                return;
+              }
             }
-        }
+          }
         
         limparSelecao();
       }
@@ -409,12 +419,10 @@
           title: 'Parabéns! 🎉',
           html: `
             <p style="font-size: 1.1rem; line-height: 1.6;">
-              Um pai <span class="amoroso">amoroso</span> e 
-              <span class="carinhoso">carinhoso</span>, que é 
-              <span class="amigo">amigo</span> nos momentos certos, 
-              <span class="responsavel">responsável</span> em todas as situações 
-              e sábio <span class="conselheiro">conselheiro</span>, 
-              é o maior tesouro que uma família pode ter. Te amo.
+              Um <span class="pai">pai</span> <span class="calmo">calmo</span>, 
+              <span class="fiel">fiel</span> e presente, que é um verdadeiro 
+              <span class="amigo">amigo</span> nas horas difíceis e tem um coração 
+              <span class="doce">doce</span>, é um tesouro raro e precioso. Te amo.
             </p> `,
 
             icon: 'success',
