@@ -89,6 +89,28 @@
       background: #0056b3;
     }
 
+      .btn{
+      margin-top: 20px;
+      text-decoration: none; /* tira o sublinhado */
+      color: white; /* cor do texto */
+      background-color: #0c62e2;
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: none;
+      display: inline-block;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-left: 35px;
+      font-family: var(--fonte-principal);
+    }
+
+    .btn:hover{
+
+        background-color: #3cc5e7;
+      
+    }
+
     #message {
       margin-top: 15px;
       font-weight: bold;
@@ -108,6 +130,12 @@
         padding: 10px 15px;
         font-size: 0.9rem;
       }
+
+      .btn {
+        margin:15px auto !important;
+        margin-top: 1px !important;
+        width: 80%;
+      }
     }
   </style>
 </head>
@@ -117,7 +145,10 @@
     <div id="puzzle" class="grayscale"></div>
     <button onclick="shuffle()">Embaralhar</button>
     <div id="message"></div>
-  </div>
+
+      <a href="jogo.html" target="_blank" class="btn">
+              Clique aqui para a próxima surpresa!
+          </a>
 
   <script>
     const puzzle = document.getElementById('puzzle');

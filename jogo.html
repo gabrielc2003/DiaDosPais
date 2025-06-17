@@ -147,8 +147,9 @@
     }
 
     .word-grid {
-      grid-template-columns: repeat(15, minmax(20px, 1fr));
+      grid-template-columns: repeat(12, minmax(50px, 1fr));
       gap: 2px;
+      margin-bottom: 15px;
     }
 
     .words-to-find {
@@ -205,9 +206,28 @@
       overflow-y: hidden;
     }
 
-    .word-grid {
-      gap: 0px;
+     .word-grid {
+      display: grid;
+      grid-template-columns: repeat(8, 45px);
+      gap: 5px;
+      margin-bottom: 15px;
+      justify-content: center;
     }
+
+    .word-cell {
+      width: 45px;
+      height: 45px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      background-color: #111727;
+      color: #ffffff;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
   }
 
 
@@ -225,11 +245,11 @@
       line-height: 1.5;
     }
 
-    .amoroso { color: #0c62e2; font-weight: bold; font-family: 'Outfit';}
-    .carinhoso { color: #66b3ff; font-weight: bold; font-family: 'Outfit'; }
+    .doce { color: #0c62e2; font-weight: bold; font-family: 'Outfit';}
+    .fiel { color: #66b3ff; font-weight: bold; font-family: 'Outfit'; }
     .amigo { color: #3cc5e7; font-weight: bold; font-family: 'Outfit'; }
-    .responsavel { color: #0c62e2; font-weight: bold; font-family: 'Outfit'; }
-    .conselheiro { color: #3cc5e7; font-weight: bold; font-family: 'Outfit'; }
+    .pai { color: #0c62e2; font-weight: bold; font-family: 'Outfit'; }
+    .calmo { color: #3cc5e7; font-weight: bold; font-family: 'Outfit'; }
 
   </style>
 </head>
@@ -247,11 +267,11 @@
     <div class="words-to-find">
       <h2>Encontre as palavras:</h2>
       <ul>
-        <li>AMOROSO</li>
-        <li>CARINHOSO</li>
+        <li>DOCE</li>
+        <li>CALMO</li>
         <li>AMIGO</li>
-        <li>RESPONSAVEL</li>
-        <li>CONSELHEIRO</li>
+        <li>FIEL</li>
+        <li>PAI</li>
       </ul>
     </div>
   </div>
@@ -260,21 +280,23 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Matriz de letras para o caça-palavras com as novas palavras
-      const letterMatrix = [
-        ['A', 'M', 'O', 'R', 'O', 'S', 'O', 'X', 'Y', 'Z', 'W', 'V', 'U', 'T', 'S'],
-        ['C', 'A', 'R', 'I', 'N', 'H', 'O', 'S', 'O', 'L', 'M', 'N', 'O', 'P', 'Q'],
-        ['A', 'M', 'I', 'G', 'O', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'],
-        ['R', 'E', 'S', 'P', 'O', 'N', 'S', 'A', 'V', 'E', 'L', 'Y', 'Z', 'A', 'B'],
-        ['C', 'O', 'N', 'S', 'E', 'L', 'H', 'E', 'I', 'R', 'O', 'K', 'L', 'M', 'N'],
-        ['O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'A', 'B', 'C'],
-        ['D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'],
-        ['S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
-        ['H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V'],
-        ['W', 'X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K']
-      ];
+         const letterMatrix = [
+          ['C', 'A', 'L', 'M', 'O', 'P', 'X', 'S'], // CALMO (linha 0)
+          ['B', 'Ç', 'F', 'G', 'A', 'Q', 'U', 'E'], // A de AMIGO (coluna 4)
+          ['X', 'Y', 'J', 'K', 'M', 'S', 'Q', 'C'], // M
+          ['D', 'O', 'C', 'E', 'I', 'P', 'R', 'T'], // DOCE (linha 3), I
+          ['N', 'L', 'Ç', 'V', 'G', 'B', 'H', 'V'], // G
+          ['Q', 'W', 'X', 'M', 'O', 'K', 'X', 'O'], // O
+          ['P', 'C', 'S', 'J', 'F', 'I', 'E', 'L'], // FIEL (linha 6)
+          ['S', 'X', 'Z', 'F', 'H', 'Ç', 'B', 'N'],  // L
+          ['U', 'R', 'F', 'P', 'A', 'I', 'W', 'L'],  // L
+        ];
+
+
+
 
       // Palavras para encontrar
-      const palavras = ['AMOROSO', 'CARINHOSO', 'AMIGO', 'RESPONSAVEL', 'CONSELHEIRO'];
+      const palavras = ['PAI', 'FIEL', 'AMIGO', 'DOCE', 'CALMO'];
       let encontradas = [];
       let selecionadas = [];
       let interagindo = false;
