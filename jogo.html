@@ -206,9 +206,9 @@
       overflow-y: hidden;
     }
 
-     .word-grid {
+    .word-grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(6, 1fr); /* 6 colunas */
       gap: 4px;
       margin-bottom: 15px;
       max-width: 90vw;
@@ -217,8 +217,8 @@
     }
 
     .word-cell {
-      aspect-ratio: 1 / 1; /* mantém quadrado responsivo */
-      font-size: clamp(1rem, 4vw, 1.4rem); /* ajusta tamanho da fonte conforme tela */
+      aspect-ratio: 1 / 1;
+      font-size: clamp(1rem, 4vw, 1.4rem);
       font-weight: bold;
       background-color: #111727;
       color: #ffffff;
@@ -227,6 +227,7 @@
       align-items: center;
       justify-content: center;
     }
+
 
   }
 
@@ -280,17 +281,14 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Matriz de letras para o caça-palavras com as novas palavras
-        const letterMatrix = [
-            ['C', 'A', 'L', 'M', 'O', 'P'], // <- 6 colunas
-            ['B', 'Ç', 'F', 'G', 'A', 'Q'],
-            ['X', 'Y', 'J', 'K', 'M', 'S'],
-            ['D', 'O', 'C', 'E', 'I', 'P'], // <- DOCE está aqui!
-            ['N', 'L', 'Ç', 'V', 'G', 'B'],
-            ['Q', 'W', 'X', 'M', 'O', 'K'],
-            ['P', 'C', 'F', 'I', 'E', 'L'], // <- FIEL está aqui
-            ['S', 'X', 'Z', 'F', 'H', 'Ç'],
-            ['U', 'R', 'F', 'P', 'A', 'I'],
+       const letterMatrix = [
+            ['C', 'A', 'L', 'M', 'O', 'X'],  // CALMO (horizontal, col 0-4)
+            ['Z', 'M', 'B', 'J', 'K', 'W'],  // P (final de PAI)
+            ['F', 'I', 'E', 'L', 'O', 'Q'],  // FIEL (col 0-3), A de AMIGO
+            ['X', 'G', 'X', 'P', 'A', 'I'],  // M de AMIGO
+            ['D', 'O', 'C', 'E', 'I', 'G'],  // DOCE (col 0-3), I e G de AMIGO
           ];
+
 
       // Palavras para encontrar
       const palavras = ['PAI', 'FIEL', 'AMIGO', 'DOCE', 'CALMO'];
