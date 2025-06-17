@@ -185,6 +185,16 @@
       align-items: center;
       justify-content: center;
     }
+
+    .swal2-confirm-custom {
+        font-family: 'Outfit';
+        background-color: #0c62e2;
+      }
+
+    .swal2-confirm-custom:hover {
+        font-family: 'Outfit';
+        background-color: #66b3ff;
+      }
   }
 
 
@@ -430,7 +440,8 @@
             background: '#121212',
             color: 'white',
             customClass: {
-            popup: 'caixa-final'
+              confirmButton: 'swal2-confirm-custom',
+              popup: 'caixa-final'
           }
         }).then(() => {
           location.reload(); // recarrega a página para jogar de novo

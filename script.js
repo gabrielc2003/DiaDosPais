@@ -32,7 +32,7 @@ function iniciarTela1() {
               popup: 'meu-alerta'
   }
         });
-    }, 3000); // 3 segundos = 3000 milissegundos
+    }, 2000); // 3 segundos = 3000 milissegundos
 }
 
 // Chamar a função quando a página carregar
