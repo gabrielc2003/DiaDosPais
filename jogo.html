@@ -208,16 +208,17 @@
 
      .word-grid {
       display: grid;
-      grid-template-columns: repeat(8, 45px);
-      gap: 5px;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 4px;
       margin-bottom: 15px;
-      justify-content: center;
+      max-width: 90vw;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .word-cell {
-      width: 45px;
-      height: 45px;
-      font-size: 1.5rem;
+      aspect-ratio: 1 / 1; /* mantém quadrado responsivo */
+      font-size: clamp(1rem, 4vw, 1.4rem); /* ajusta tamanho da fonte conforme tela */
       font-weight: bold;
       background-color: #111727;
       color: #ffffff;
@@ -226,6 +227,7 @@
       align-items: center;
       justify-content: center;
     }
+
 
 
   }
@@ -281,15 +283,15 @@
     document.addEventListener('DOMContentLoaded', () => {
       // Matriz de letras para o caça-palavras com as novas palavras
          const letterMatrix = [
-          ['C', 'A', 'L', 'M', 'O', 'P', 'X', 'S'], // CALMO (linha 0)
-          ['B', 'Ç', 'F', 'G', 'A', 'Q', 'U', 'E'], // A de AMIGO (coluna 4)
-          ['X', 'Y', 'J', 'K', 'M', 'S', 'Q', 'C'], // M
-          ['D', 'O', 'C', 'E', 'I', 'P', 'R', 'T'], // DOCE (linha 3), I
-          ['N', 'L', 'Ç', 'V', 'G', 'B', 'H', 'V'], // G
-          ['Q', 'W', 'X', 'M', 'O', 'K', 'X', 'O'], // O
-          ['P', 'C', 'S', 'J', 'F', 'I', 'E', 'L'], // FIEL (linha 6)
-          ['S', 'X', 'Z', 'F', 'H', 'Ç', 'B', 'N'],  // L
-          ['U', 'R', 'F', 'P', 'A', 'I', 'W', 'L'],  // L
+          ['C', 'A', 'L', 'M', 'O', 'P',], // CALMO (linha 0)
+          ['B', 'Ç', 'F', 'G', 'A', 'Q',], // A de AMIGO (coluna 4)
+          ['X', 'Y', 'J', 'K', 'M', 'S',], // M
+          ['D', 'O', 'C', 'E', 'I', 'P',], // DOCE (linha 3), I
+          ['N', 'L', 'Ç', 'V', 'G', 'B',], // G
+          ['Q', 'W', 'X', 'M', 'O', 'K',], // O
+          ['P', 'C', 'F', 'I', 'E', 'L',], // FIEL (linha 6)
+          ['S', 'X', 'Z', 'F', 'H', 'Ç',],  // L
+          ['U', 'R', 'F', 'P', 'A', 'I',],  // L
         ];
 
 
